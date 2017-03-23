@@ -104,7 +104,7 @@
     <Button
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:id="@+id/add"
+        android:id="@+id/add2"
         android:text="שלח"
         android:layout_below="@+id/extra"
         android:layout_centerHorizontal="true"

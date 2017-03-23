@@ -1,6 +1,7 @@
 package com.example.ridewithme;
 
 import android.app.DialogFragment;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -31,6 +32,7 @@ public class SignIn extends DialogFragment {
     private TextView textView;
     private EditText email,password;
     private Button signIn;
+    private ProgressDialog progressDialog;
     //LoginActivity loginActivity;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -49,10 +51,12 @@ public class SignIn extends DialogFragment {
         password = (EditText) v.findViewById(R.id.signin_password);
         textView = (TextView) v.findViewById(R.id.tv) ;
         signIn = (Button) v.findViewById(R.id.signin_btn);
-
+        progressDialog = new ProgressDialog(getActivity());
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog.setMessage("אנא המתן...");
+                progressDialog.show();
                 createUser();
             }
         });
@@ -73,6 +77,7 @@ public class SignIn extends DialogFragment {
                         public void onComplete(@NonNull Task<AuthResult> task) {
 
                             if (!task.isSuccessful()) {
+                                progressDialog.dismiss();
                                 Toast.makeText(getActivity(), "ישנה בעיה",Toast.LENGTH_SHORT).show();
                             }
                             else startActivity(new Intent(getActivity() , MainScreen.class));

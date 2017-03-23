@@ -1,6 +1,7 @@
 package com.example.ridewithme;
 
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,11 +24,13 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
     //Views
-    EditText et_email,et_password;
-    Button loginBtn,enterBtn;
+    private EditText et_email,et_password;
+    private Button loginBtn,enterBtn;
+    private ProgressDialog progressDialog;
     //FireBase Auth
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         et_password = (EditText) findViewById(R.id.password);
         loginBtn = (Button) findViewById(R.id.loginBtn);
         enterBtn = (Button) findViewById(R.id.enter);
+        progressDialog = new ProgressDialog(this);
         //when user start the app, this method check if he already sign in.
         //if yes, he will move to main screen of the app.
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -54,8 +59,11 @@ public class LoginActivity extends AppCompatActivity {
         enterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog.setMessage("אנא המתן...");
+                progressDialog.show();
                 startSignIn();
             }
+
         });
 
         //when loginBtn pushed, startSignIn() method start
@@ -65,7 +73,6 @@ public class LoginActivity extends AppCompatActivity {
                 FragmentManager manager = getFragmentManager();
                 SignIn signIn = new SignIn();
                 signIn.show(manager, "signIn");
-               // createUser();
 
             }
         });
@@ -88,34 +95,14 @@ public class LoginActivity extends AppCompatActivity {
             mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
+
                     if(!task.isSuccessful()){
                         Toast.makeText(LoginActivity.this,"אימייל או סיסמה שגויים",Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
                     }
                 }
             });
-
         }
     }
-
-   /* private void createUser(){
-        String email = et_email.getText().toString();
-        String password = et_password.getText().toString();
-
-        if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password) ){
-            Toast.makeText(LoginActivity.this,"אנא בדוק שמילאת הכל",Toast.LENGTH_LONG).show();
-        }
-        else{
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-
-                            if (!task.isSuccessful()) {
-                                Toast.makeText(LoginActivity.this, "ישנה בעיה",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-        }
-    }*/
 }
 

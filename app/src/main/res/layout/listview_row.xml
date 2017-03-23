@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:elevation="5dp">
+    android:elevation="5dp"
+    >
 
     <TextView
         android:id="@+id/user_name"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
+        android:textSize="16dp"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -23,7 +23,7 @@
 
     <TextView
         android:id="@+id/user_date_time"
-        android:textSize="15dp"
+        android:textSize="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
@@ -52,15 +52,17 @@
 
     <TextView
         android:id="@+id/user_msg"
-        android:textSize="15dp"
-        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/user_phone"
         android:gravity="right"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
-        />
+        android:layout_marginBottom="7dp"
+        android:layout_below="@+id/user_phone"
+        android:layout_toEndOf="@+id/remove" />
 
     <TextView
         android:id="@+id/user_extra"
@@ -73,9 +75,26 @@
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="10dp"
         android:layout_below="@+id/user_msg"
+        android:layout_toEndOf="@+id/remove" />
+
+    <ImageButton
+
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@mipmap/ic_remove"
+        android:layout_alignBottom="@+id/user_extra"
+        android:layout_alignParentStart="true"
+        android:id="@+id/remove"
         />
 
-
+    <TextView
+        android:id="@+id/user_uid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/user_date_time"
+        android:layout_alignStart="@+id/user_msg"
+        android:text="hello"
+        android:visibility="gone"/>
 
 
 </RelativeLayout>

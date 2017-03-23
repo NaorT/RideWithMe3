@@ -72,11 +72,11 @@ public class SearchTremp extends DialogFragment {
             String s2 = str.getValue(_7Data.class).get_to();
             String s3 = str.getValue(_7Data.class).get_date();
             String s4 = str.getValue(_7Data.class).get_time();
-
+            String s5 = str.getValue(_7Data.class).get_name();
             if(s1.equals(str_from) & s2.equals(str_to)  & s3.equals(str_date)  & s4.equals(str_time)){
-                Toast.makeText(getActivity(), "יש טרמפ!" + " " + str.getValue(_7Data.class).get_name().toString(), Toast.LENGTH_SHORT).show();
-            }
+                Toast.makeText(getActivity(), "יש טרמפ!" + " " + s5, Toast.LENGTH_SHORT).show();
 
+            }
         }
     }
 

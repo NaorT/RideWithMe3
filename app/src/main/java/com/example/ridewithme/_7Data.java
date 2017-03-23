@@ -10,9 +10,9 @@ public class _7Data {
     public String _time;
     public String _extras;
     public String _timestamp;
+    public String _uid;
 
-
-    public _7Data(String _name , String _phone, String _from, String _to, String _date, String _time, String _extras,String _timestamp) {
+    public _7Data( String _uid , String _name , String _phone, String _from, String _to, String _date, String _time, String _extras,String _timestamp) {
         this._date = _date;
         this._to = _to;
         this._time = _time;
@@ -21,10 +21,14 @@ public class _7Data {
         this._from = _from;
         this._extras = _extras;
         this._timestamp = _timestamp;
+        this._uid = _uid;
 
     }
 
     public _7Data(){}
+
+    public String get_uid() { return _uid; }
+
     public String get_to() {
         return _to;
     }
@@ -86,5 +90,9 @@ public class _7Data {
     public void set_date(String _date) {
         this._date = _date;
     }
+
+    public void set_uid(String _uid) { this._uid = _uid;
+    }
+
 
 }
