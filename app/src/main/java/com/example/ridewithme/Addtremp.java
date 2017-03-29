@@ -1,6 +1,7 @@
 package com.example.ridewithme;
 
 import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -26,16 +26,20 @@ import java.util.TimeZone;
  */
 
 public class Addtremp extends DialogFragment {
-    public EditText name,phone,from,to,date,time,extra;
+    public EditText name, phone, from, to, date, time, extra;
     public Button send_btn;
     private DatabaseReference mDatabase;
-    public String str_uid,str_name,str_phone,str_from,str_to,str_date,str_time,str_extra,str_timestamp,send_time,send_time2;
-    public _7Data sevenString;
+    public String str_key, str_uid, str_name, str_phone, str_from, str_to, str_date, str_time, str_extra, str_timestamp, send_time, send_time2;
+    public TrempData trempData;
     private FirebaseAuth mAuth;
+    private MyDatePicker myDatePicker;
+    private MyTimePicker myTimePicker;
 
 
 
-    public Addtremp(){}
+    public Addtremp() {
+
+    }
 
     @Nullable
     @Override
@@ -44,6 +48,7 @@ public class Addtremp extends DialogFragment {
         //INITIALIZE DATA_BASE AND VIEWS
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Posts");
         mAuth = FirebaseAuth.getInstance();
+
         //child name will be like dateFormat "HH:mm:ss dd-MM-yyyy"
         final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+2"));
@@ -58,12 +63,17 @@ public class Addtremp extends DialogFragment {
         from = (EditText) v.findViewById(R.id.from);
         to = (EditText) v.findViewById(R.id.to);
         date = (EditText) v.findViewById(R.id.date);
+        myDatePicker = new MyDatePicker(getActivity(),date);
         time = (EditText) v.findViewById(R.id.time);
+        myTimePicker = new MyTimePicker(getActivity(),time);
         extra = (EditText) v.findViewById(R.id.extra);
-        send_btn = (Button) v.findViewById(R.id.add2);
+        send_btn = (Button) v.findViewById(R.id.add2) ;
+
         send_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 str_name = name.getText().toString();
                 str_phone = phone.getText().toString();
                 str_from = from.getText().toString();
@@ -73,13 +83,14 @@ public class Addtremp extends DialogFragment {
                 str_extra = extra.getText().toString();
                 str_timestamp = send_time2;
                 str_uid = mAuth.getCurrentUser().getUid();
-                //sevenString = new _7Data(null,str_uid,str_name, str_phone, str_from, str_to, str_date, str_time, str_extra, str_timestamp);
+
+                trempData = new TrempData(str_key, str_uid, str_name, str_phone, str_from, str_to, str_date, str_time, str_extra, str_timestamp);
                 if (name.length() == 0) {
                     name.requestFocus();
                     name.setHintTextColor(Color.RED);
                     name.setHint("מלא את שמך");
                     return;
-                } else if (phone.length() != 10 ) {
+                } else if (phone.length() != 10) {
                     phone.requestFocus();
                     phone.setText("");
                     phone.setHintTextColor(Color.RED);
@@ -108,11 +119,10 @@ public class Addtremp extends DialogFragment {
                     return;
                 }
                 DatabaseReference newPost = mDatabase.push();
-                sevenString = new _7Data(str_uid,str_name, str_phone, str_from, str_to, str_date, str_time, str_extra, str_timestamp);
-                newPost.setValue(sevenString);
-                //mDatabase.push().setValue(sevenString);
-                /*child(send_time + " " + str_name ).*/
-                Toast.makeText(getActivity(),"הטרמפ נוסף בהצלחה", Toast.LENGTH_SHORT).show();
+                str_key = newPost.getKey();
+                trempData = new TrempData(str_key, str_uid, str_name, str_phone, str_from, str_to, str_date, str_time, str_extra, str_timestamp);
+                newPost.setValue(trempData);
+                Toast.makeText(getActivity(), "הטרמפ נוסף בהצלחה", Toast.LENGTH_SHORT).show();
                 dismiss();
             }
 
@@ -120,6 +130,10 @@ public class Addtremp extends DialogFragment {
         });
         return v;
     }
-
-
 }
+
+
+
+
+
+

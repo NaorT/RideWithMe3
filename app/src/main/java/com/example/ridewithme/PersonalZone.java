@@ -5,16 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
-import com.google.firebase.database.DataSnapshot;
-
 import java.util.ArrayList;
 
 public class PersonalZone extends AppCompatActivity {
     public ListView personalzone_lv;
     public CustomAdapter adapter;
-    public ArrayList<_7Data> personaldataArrayList = new ArrayList<>();
+    public ArrayList<TrempData> personaldataArrayList = new ArrayList<>();
     public Addtremp addtremp = new Addtremp();
-    public _7Data data;
+    public TrempData data;
 
     public PersonalZone(){}
 

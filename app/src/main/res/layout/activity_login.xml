@@ -8,8 +8,6 @@
     android:background="@drawable/bck"
     tools:context="com.example.ridewithme.LoginActivity" >
 
-
-
    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -92,7 +90,7 @@
     <Button
          android:textColor="@color/white"
          android:background="@color/green"
-         android:alpha="0.7"
+         android:alpha="0.8"
          android:layout_width="match_parent"
          android:layout_height="40dp"
          android:id="@+id/loginBtn"

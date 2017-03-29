@@ -73,16 +73,16 @@ public class SignIn extends DialogFragment {
         }
         else{
             mAuth.createUserWithEmailAndPassword(email1, password1).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
 
-                            if (!task.isSuccessful()) {
-                                progressDialog.dismiss();
-                                Toast.makeText(getActivity(), "ישנה בעיה",Toast.LENGTH_SHORT).show();
-                            }
-                            else startActivity(new Intent(getActivity() , MainScreen.class));
-                        }
-                    });
+                    if (!task.isSuccessful()) {
+                        progressDialog.dismiss();
+                        Toast.makeText(getActivity(), "ישנה בעיה",Toast.LENGTH_SHORT).show();
+                    }
+                    else startActivity(new Intent(getActivity() , MainScreen.class));
+                }
+            });
         }
     }
 

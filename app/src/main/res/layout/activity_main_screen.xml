@@ -11,41 +11,50 @@
     android:background="#f9f9f9"
     tools:context="com.example.ridewithme.MainScreen">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:text="לוח הטרמפים"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp" />
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/logout"
         android:id="@+id/mListView"
         android:layout_marginBottom="5dp"
         android:dividerHeight="12dp"
-        android:divider="@color/transparent"
-        />
+        android:divider="#f9f9f9"
+        android:layout_below="@+id/textView3" />
 
     <ImageButton
         android:background="@mipmap/add1"
         android:text="הוסף"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:id="@+id/add2"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="35dp"
         android:layout_alignParentBottom="true"
         android:layout_toStartOf="@+id/web" />
 
     <ImageButton
         android:background="@mipmap/logout"
         android:text="logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:id="@+id/logout"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
 
     <ImageButton
         android:background="@mipmap/web"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:id="@+id/web"
         android:layout_below="@+id/mListView"
         android:layout_alignParentEnd="true" />
@@ -53,10 +62,10 @@
     <ImageButton
         android:background="@mipmap/search"
         android:text="חפש"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:id="@+id/search"
-        android:layout_marginStart="27dp"
+        android:layout_marginStart="35dp"
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@+id/logout" />
 

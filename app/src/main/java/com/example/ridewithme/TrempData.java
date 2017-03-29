@@ -1,6 +1,6 @@
 package com.example.ridewithme;
 
-public class _7Data {
+public class TrempData {
 
     public String _name;
     public String _phone;
@@ -11,8 +11,11 @@ public class _7Data {
     public String _extras;
     public String _timestamp;
     public String _uid;
+    public String _key;
+    public int pos;
 
-    public _7Data( String _uid , String _name , String _phone, String _from, String _to, String _date, String _time, String _extras,String _timestamp) {
+
+    public TrempData(String _key, String _uid , String _name , String _phone, String _from, String _to, String _date, String _time, String _extras, String _timestamp) {
         this._date = _date;
         this._to = _to;
         this._time = _time;
@@ -22,10 +25,11 @@ public class _7Data {
         this._extras = _extras;
         this._timestamp = _timestamp;
         this._uid = _uid;
+        this._key = _key;
 
     }
 
-    public _7Data(){}
+    public TrempData(){}
 
     public String get_uid() { return _uid; }
 
@@ -91,8 +95,17 @@ public class _7Data {
         this._date = _date;
     }
 
-    public void set_uid(String _uid) { this._uid = _uid;
-    }
+    public void set_uid(String _uid) { this._uid = _uid; }
+
+    public String get_key() {return _key; }
+
+    public void set_key(String _key) {this._key = _key; }
+
+    public int getPos() { return pos; }
+
+    public void setPos(int pos) {this.pos = pos; }
+
+
 
 
 }

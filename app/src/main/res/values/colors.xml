@@ -9,5 +9,6 @@
     <color name="black">#000</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="red">#FF0000</color>
+    <color name="purple">#FF4A4D93</color>
 
 </resources>

@@ -16,7 +16,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="5dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:gravity="right"/>
 
     <EditText
@@ -58,25 +58,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/date"
-        android:inputType="datetime"
-        android:hint="תאריך"
+        android:hint="לחץ לבחירת תאריך"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
+        android:gravity="right"
         android:layout_below="@+id/to"
-        android:layout_marginBottom="5dp"
-        android:gravity="right"/>
+        android:layout_alignParentStart="true"
+        android:focusable="false"
+        />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/time"
-        android:hint="שעת יציאה"
-        android:inputType="time"
+        android:hint="לחץ לבחירת שעת יציאה"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
+        android:gravity="right"
         android:layout_below="@+id/date"
-        android:layout_marginBottom="5dp"
-        android:gravity="right"/>
+        android:layout_alignParentStart="true"
+        android:focusable="false"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -94,20 +95,21 @@
         android:layout_height="wrap_content"
         android:text="הוסף טרמפ חדש"
         android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
-        android:textSize="20dp"/>
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/name" />
 
     <Button
-        android:layout_width="70dp"
+        android:layout_width="match_parent"
         android:layout_height="70dp"
         android:id="@+id/add2"
         android:text="שלח"
         android:layout_below="@+id/extra"
         android:layout_centerHorizontal="true"
+        android:background="@color/light_blue"
         />
 
 

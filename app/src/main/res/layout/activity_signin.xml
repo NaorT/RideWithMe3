@@ -7,9 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@color/black"
-    android:alpha="0.6"
-
-    >
+    android:alpha="0.6" >
 
 
     <Button
@@ -71,6 +69,7 @@
         android:layout_marginTop="33dp"
         android:layout_below="@+id/tv"
         android:layout_alignParentStart="true"
+
         />
 
 </RelativeLayout>

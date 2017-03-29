@@ -2,20 +2,18 @@ package com.example.ridewithme;
 
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.CursorAdapter;
+import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,27 +30,27 @@ import java.util.ArrayList;
 
 public class MainScreen extends AppCompatActivity {
 
-    private ImageButton logoutbtn,searchBtn,addBtn,webBtn,personalZone;
-    private ListView mListView;
+    private ImageButton logoutbtn, searchBtn, addBtn, webBtn, personalZone, editBtn;
+    public ListView mListView;
     private CustomAdapter adapter;
-    private ArrayList<_7Data> dataArrayList = new ArrayList<>();
+    public ArrayList<TrempData> dataArrayList = new ArrayList<>();
     private FirebaseAuth mAuth;
-    private FirebaseUser firebaseUser;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabase;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
         mAuth = FirebaseAuth.getInstance();
-        firebaseUser = mAuth.getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mListView = (ListView)findViewById(R.id.mListView);
+        mListView = (ListView) findViewById(R.id.mListView);
         searchBtn = (ImageButton) findViewById(R.id.search);
         addBtn = (ImageButton) findViewById(R.id.add2);
         webBtn = (ImageButton) findViewById(R.id.web);
         logoutbtn = (ImageButton) findViewById(R.id.logout);
+        editBtn = (ImageButton) findViewById(R.id.edit);
         personalZone = (ImageButton) findViewById(R.id.myzone);
         adapter = new CustomAdapter(this, R.layout.listview_row, dataArrayList);
         mListView.setAdapter(adapter);
@@ -96,8 +94,10 @@ public class MainScreen extends AppCompatActivity {
         webBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainScreen.this, WebViewActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(MainScreen.this, WebViewActivity.class);
+//                startActivity(intent);
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/groups/114964358535991/"));
+                startActivity(i);
             }
         });
 
@@ -108,9 +108,10 @@ public class MainScreen extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
-    public void retrieveData(){
+    public void retrieveData() {
         mDatabase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -126,6 +127,7 @@ public class MainScreen extends AppCompatActivity {
             public void onChildRemoved(DataSnapshot dataSnapshot) {
 
             }
+
 
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
@@ -144,34 +146,21 @@ public class MainScreen extends AppCompatActivity {
         dataArrayList.clear();
 
         for (DataSnapshot str : dataSnapshot.getChildren()) {
-            _7Data _7data = new _7Data();
-            _7data.set_uid(str.getValue(_7Data.class).get_uid());
-            _7data.set_name(str.getValue(_7Data.class).get_name());
-            _7data.set_phone(str.getValue(_7Data.class).get_phone());
-            _7data.set_from(str.getValue(_7Data.class).get_from());
-            _7data.set_to(str.getValue(_7Data.class).get_to());
-            _7data.set_date(str.getValue(_7Data.class).get_date());
-            _7data.set_time(str.getValue(_7Data.class).get_time());
-            _7data.set_extras(str.getValue(_7Data.class).get_extras());
-            _7data.set_timestamp(str.getValue(_7Data.class).get_timestamp());
-            dataArrayList.add(0,_7data);
+            TrempData trempData = new TrempData();
+            trempData.set_uid(str.getValue(TrempData.class).get_uid());
+            trempData.set_name(str.getValue(TrempData.class).get_name());
+            trempData.set_phone(str.getValue(TrempData.class).get_phone());
+            trempData.set_from(str.getValue(TrempData.class).get_from());
+            trempData.set_to(str.getValue(TrempData.class).get_to());
+            trempData.set_date(str.getValue(TrempData.class).get_date());
+            trempData.set_time(str.getValue(TrempData.class).get_time());
+            trempData.set_extras(str.getValue(TrempData.class).get_extras());
+            trempData.set_timestamp(str.getValue(TrempData.class).get_timestamp());
+            dataArrayList.add(0, trempData);
             mListView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
-
-            adapter.getDeleteTremp().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String key = mDatabase.getKey();
-                    mDatabase.child(key).removeValue();
-                    adapter.notifyDataSetChanged();
-                }
-            });
         }
-
     }
-
-
-
 
     @Override
     protected void onStart() {
