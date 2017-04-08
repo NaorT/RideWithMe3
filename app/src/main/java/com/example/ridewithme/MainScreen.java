@@ -1,18 +1,17 @@
 package com.example.ridewithme;
 
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -22,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+
 /**
  * Created by Mesfin & Naor on 14/12/2016.
  */
@@ -30,19 +30,25 @@ import java.util.ArrayList;
 
 public class MainScreen extends AppCompatActivity {
 
-    private ImageButton logoutbtn, searchBtn, addBtn, webBtn, personalZone, editBtn;
+    private ImageButton logoutbtn, searchBtn, addBtn, webBtn, personalZone;
     public ListView mListView;
     private CustomAdapter adapter;
     public ArrayList<TrempData> dataArrayList = new ArrayList<>();
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabase;
+    private ProgressDialog progressDialog;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("אנא המתן. לוח הטרמפים נטען");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mListView = (ListView) findViewById(R.id.mListView);
@@ -50,11 +56,14 @@ public class MainScreen extends AppCompatActivity {
         addBtn = (ImageButton) findViewById(R.id.add2);
         webBtn = (ImageButton) findViewById(R.id.web);
         logoutbtn = (ImageButton) findViewById(R.id.logout);
-        editBtn = (ImageButton) findViewById(R.id.edit);
         personalZone = (ImageButton) findViewById(R.id.myzone);
         adapter = new CustomAdapter(this, R.layout.listview_row, dataArrayList);
         mListView.setAdapter(adapter);
         retrieveData();
+
+        //mListView.setEmptyView(findViewById(R.id.emptylist1));
+
+
 
         //check if the user is signOut. if yes he will remove to the login activity
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -94,8 +103,6 @@ public class MainScreen extends AppCompatActivity {
         webBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(MainScreen.this, WebViewActivity.class);
-//                startActivity(intent);
                 Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/groups/114964358535991/"));
                 startActivity(i);
             }
@@ -124,10 +131,18 @@ public class MainScreen extends AppCompatActivity {
             }
 
             @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
+            public void onChildRemoved(final DataSnapshot dataSnapshot) {
+
+                String key = dataSnapshot.getKey();
+                for (TrempData td : dataArrayList) {
+                    if (key.equals(td.get_key())) {
+                        dataArrayList.remove(td);
+                        adapter.notifyDataSetChanged();
+                        break;
+                    }
+                }
 
             }
-
 
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
@@ -142,11 +157,15 @@ public class MainScreen extends AppCompatActivity {
     }
 
 
+
+
     public void getUpdates(DataSnapshot dataSnapshot) {
         dataArrayList.clear();
 
         for (DataSnapshot str : dataSnapshot.getChildren()) {
             TrempData trempData = new TrempData();
+
+            trempData.set_key(str.getValue(TrempData.class).get_key());
             trempData.set_uid(str.getValue(TrempData.class).get_uid());
             trempData.set_name(str.getValue(TrempData.class).get_name());
             trempData.set_phone(str.getValue(TrempData.class).get_phone());
@@ -159,7 +178,9 @@ public class MainScreen extends AppCompatActivity {
             dataArrayList.add(0, trempData);
             mListView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
+
         }
+        progressDialog.dismiss();
     }
 
     @Override
@@ -167,6 +188,8 @@ public class MainScreen extends AppCompatActivity {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
     }
+
+
 
 
 

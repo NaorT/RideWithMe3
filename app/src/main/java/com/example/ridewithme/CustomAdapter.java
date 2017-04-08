@@ -1,15 +1,24 @@
 package com.example.ridewithme;
 
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
+import android.provider.ContactsContract;
+import android.provider.MediaStore;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,33 +29,32 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
+
+import static android.app.Activity.RESULT_OK;
+import static android.support.v4.app.ActivityCompat.startActivityForResult;
 
 
 /**
  * Created by Mesfin & Naor on 04/12/2016.
  */
 
-public class CustomAdapter extends ArrayAdapter<TrempData> {
-    private TextView name;
-    private TextView phone;
-    private TextView date_time;
-    private TextView msg;
-    private TextView extra;
-    private TextView uid;
-    private ImageButton deleteTremp , editTremp , phoneBtn;
+public class CustomAdapter extends ArrayAdapter<TrempData>  {
+
+    private TextView name  ,phone ,date_time ,msg , extra,uid ;
+    private ImageButton deleteTremp , editTremp , phoneBtn ;
     private int layoutResource;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
-
 
 
     public CustomAdapter(Context context, int layoutResource, ArrayList<TrempData> list) {
         super(context, layoutResource, list);
         this.layoutResource = layoutResource;
         firebaseAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference("Posts");
-
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Posts");
     }
 
     @Override
@@ -60,6 +68,9 @@ public class CustomAdapter extends ArrayAdapter<TrempData> {
 
         final TrempData data = getItem(position);
         data.setPos(position);
+        int[] androidColors = getContext().getResources().getIntArray(R.array.androidcolors);
+        int randomAndroidColor = androidColors[new Random().nextInt(androidColors.length)];
+
 
         if (data != null) {
             name = (TextView) view.findViewById(R.id.user_name);
@@ -74,34 +85,11 @@ public class CustomAdapter extends ArrayAdapter<TrempData> {
 
             if (name != null & phone != null & msg != null & date_time != null & uid != null) {
                 name.setText(data.get_name());
+                name.setTextColor(randomAndroidColor);
                 phone.setText(data.get_phone());
                 date_time.setText(data.get_timestamp());
                 msg.setText(data.get_from() + "--> " + data.get_to() + ", " + data.get_date() + ", " + data.get_time());
                 uid.setText(data.get_uid());
-
-                if(data.get_extras().length() == 0) extra.setVisibility(View.GONE);
-                extra.setText("הערות:" + " " + data.get_extras());
-
-                /*deleteTremp.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        Toast.makeText(getContext(),data._key,Toast.LENGTH_LONG).show();
-                        mDatabase.orderByChild("_key").equalTo(getItemId(position)).addListenerForSingleValueEvent(
-                                new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                        dataSnapshot.getRef().setValue(null);
-                                    }
-
-
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {
-                                        Log.w("TodoApp", "getUser:onCancelled", databaseError.toException());
-                                    }
-                                });
-                    }
-                });*/
 
                 phoneBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -110,6 +98,36 @@ public class CustomAdapter extends ArrayAdapter<TrempData> {
                         getContext().startActivity(i);
                     }
                 });
+
+                deleteTremp.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        mDatabase.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                                    TrempData tremp = getItem(position);
+                                    if (ds.getKey().toString().equals(tremp.get_key())) {
+                                        mDatabase.child(ds.getKey().toString()).removeValue();
+                                        notifyDataSetChanged();
+                                        Toast.makeText(getContext(),"הטרמפ נמחק בהצלחה",Toast.LENGTH_SHORT).show();
+                                        break;
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+                });
+
+
+                if(data.get_extras().length() == 0) extra.setVisibility(View.GONE);
+                extra.setText("הערות:" + " " + data.get_extras());
 
                 if(firebaseAuth.getCurrentUser().getUid().equals(uid.getText())){
                     deleteTremp.setVisibility(View.VISIBLE);
@@ -124,7 +142,13 @@ public class CustomAdapter extends ArrayAdapter<TrempData> {
             }
         }
 
+
+
+
         return view;
     }
+
+
+
 
 }

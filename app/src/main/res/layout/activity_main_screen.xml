@@ -4,77 +4,110 @@
     android:id="@+id/activity_main_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_weight="1"
     android:paddingBottom="3dp"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#f9f9f9"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="5dp"
+    android:background="#f1f1f1"
     tools:context="com.example.ridewithme.MainScreen">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView3"
-        android:text="לוח הטרמפים"
+        android:text="ברוך הבא ללוח הטרמפים"
         android:textColor="@color/black"
         android:textSize="20dp"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"/>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="כאן תוכל להוסיף או לחפש טרמפ"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="10dp"/>
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/logout"
+        android:layout_marginBottom="40dp"
         android:id="@+id/mListView"
-        android:layout_marginBottom="5dp"
-        android:dividerHeight="12dp"
-        android:divider="#f9f9f9"
-        android:layout_below="@+id/textView3" />
+        android:dividerHeight="15dp"
+        android:divider="#f1f1f1"
+        android:layout_below="@+id/textView5" />
 
-    <ImageButton
-        android:background="@mipmap/add1"
-        android:text="הוסף"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:id="@+id/add2"
-        android:layout_marginEnd="35dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@+id/web" />
-
-    <ImageButton
-        android:background="@mipmap/logout"
-        android:text="logout"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:id="@+id/logout"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
-
-    <ImageButton
-        android:background="@mipmap/web"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:id="@+id/web"
-        android:layout_below="@+id/mListView"
-        android:layout_alignParentEnd="true" />
-
-    <ImageButton
-        android:background="@mipmap/search"
-        android:text="חפש"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:id="@+id/search"
-        android:layout_marginStart="35dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/logout" />
-
-    <ImageButton
-        android:background="@mipmap/ic_myzone"
-        android:layout_width="55dp"
+    <TextView
+        android:id="@+id/emptylist1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/myzone"
-        android:layout_below="@+id/mListView"
-        android:layout_centerHorizontal="true" />
+        android:text="אין תוכן להציג"
+        android:textSize="30dp"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_weight="1"
+        >
+
+        <ImageButton
+            android:background="@mipmap/add1"
+            android:text="הוסף"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:id="@+id/add2"
+            android:layout_marginEnd="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/web" />
+
+        <ImageButton
+            android:background="@mipmap/logout"
+            android:text="logout"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:id="@+id/logout"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageButton
+            android:background="@mipmap/web"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:id="@+id/web"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"/>
+
+        <ImageButton
+            android:background="@mipmap/search"
+            android:text="חפש"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:id="@+id/search"
+            android:layout_marginStart="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/logout" />
+
+        <ImageButton
+            android:background="@mipmap/ic_myzone"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/myzone"
+            android:layout_alignTop="@+id/add2"
+            android:layout_centerHorizontal="true" />
+
+
+    </RelativeLayout>
 
 </RelativeLayout>

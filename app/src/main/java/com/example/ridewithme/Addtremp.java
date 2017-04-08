@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -37,6 +38,8 @@ public class Addtremp extends DialogFragment {
 
 
 
+
+
     public Addtremp() {
 
     }
@@ -45,14 +48,11 @@ public class Addtremp extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.adddialog, null);
+        getDialog().getWindow().setBackgroundDrawableResource(R.drawable.dialog_drawable);
         //INITIALIZE DATA_BASE AND VIEWS
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Posts");
         mAuth = FirebaseAuth.getInstance();
 
-        //child name will be like dateFormat "HH:mm:ss dd-MM-yyyy"
-        final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
-        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+2"));
-        send_time = dateFormat.format(new Date());
         //timeStamp
         final SimpleDateFormat dateFormat1 = new SimpleDateFormat("HH:mm:ss");
         dateFormat1.setTimeZone(TimeZone.getTimeZone("GMT+2"));
@@ -118,9 +118,12 @@ public class Addtremp extends DialogFragment {
                     time.setHint("מלא שעת יציאה");
                     return;
                 }
+
+
                 DatabaseReference newPost = mDatabase.push();
                 str_key = newPost.getKey();
                 trempData = new TrempData(str_key, str_uid, str_name, str_phone, str_from, str_to, str_date, str_time, str_extra, str_timestamp);
+
                 newPost.setValue(trempData);
                 Toast.makeText(getActivity(), "הטרמפ נוסף בהצלחה", Toast.LENGTH_SHORT).show();
                 dismiss();
@@ -132,7 +135,11 @@ public class Addtremp extends DialogFragment {
     }
 }
 
+interface StartCommunication{
+    public void setComm(DataSnapshot dataSnapshot);
 
+
+}
 
 
 

@@ -59,7 +59,8 @@ public class LoginActivity extends AppCompatActivity {
         enterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog.setMessage("אנא המתן...");
+                progressDialog.setMessage("אנא המתן. מיד תועבר ללוח הטרמפים");
+                progressDialog.setCanceledOnTouchOutside(false);
                 progressDialog.show();
                 startSignIn();
             }

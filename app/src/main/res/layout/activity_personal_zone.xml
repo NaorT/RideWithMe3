@@ -4,18 +4,54 @@
     android:id="@+id/activity_personal_zone"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="3dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="5dp"
+    android:background="#f1f1f1"
     tools:context="com.example.ridewithme.PersonalZone">
+
+    <TextView
+        android:id="@+id/pz_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="איזור אישי"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"/>
+
+    <TextView
+        android:id="@+id/pz_tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="כאן תוכל למחוק או לערוך את הטרמפים שלך"
+        android:gravity="center"
+        android:layout_alignTop="@+id/pz_tv"
+        android:layout_alignEnd="@+id/pz_tv"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="10dp"/>
 
     <ListView
         android:id="@+id/myzone_listview"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:dividerHeight="12dp"
+        android:divider="#f1f1f1"
+        android:layout_below="@+id/pz_tv2">
 
     </ListView>
+
+    <TextView
+        android:id="@+id/emptylist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="אין תוכן להציג"
+        android:textSize="30dp"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        />
 
 </RelativeLayout>

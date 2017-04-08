@@ -37,6 +37,7 @@ public class SearchTremp extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.searchdialog, null);
+        getDialog().getWindow().setBackgroundDrawableResource(R.drawable.dialog_drawable);
 
         //INITIALIZE DATA_BASE AND VIEWS
         progressDialog = new ProgressDialog(getActivity());
@@ -74,6 +75,7 @@ public class SearchTremp extends DialogFragment {
             String s4 = str.getValue(TrempData.class).get_time();
             String s5 = str.getValue(TrempData.class).get_name();
             String s6 = str.getValue(TrempData.class).get_phone();
+
             if(s1.equals(str_from) & s2.equals(str_to)  & s3.equals(str_date)  & s4.equals(str_time)){
                 Toast.makeText(getActivity(), "יש טרמפ!" + " " + s5 + ", טלפון: " + s6, Toast.LENGTH_SHORT).show();
 

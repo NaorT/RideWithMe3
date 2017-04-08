@@ -55,11 +55,11 @@ public class SignIn extends DialogFragment {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog.setMessage("אנא המתן...");
-                progressDialog.show();
                 createUser();
+
             }
         });
+
         return v;
     }
 
@@ -67,8 +67,12 @@ public class SignIn extends DialogFragment {
     public void createUser(){
         String email1 = email.getText().toString();
         String password1 = password.getText().toString();
+        progressDialog.setMessage("אנא המתן. מיד תועבר ללוח הטרמפים");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
 
         if(TextUtils.isEmpty(email1) || TextUtils.isEmpty(password1) ){
+            progressDialog.dismiss();
             Toast.makeText(getActivity(),"אנא בדוק שמילאת הכל",Toast.LENGTH_LONG).show();
         }
         else{
@@ -81,6 +85,7 @@ public class SignIn extends DialogFragment {
                         Toast.makeText(getActivity(), "ישנה בעיה",Toast.LENGTH_SHORT).show();
                     }
                     else startActivity(new Intent(getActivity() , MainScreen.class));
+
                 }
             });
         }
