@@ -16,6 +16,7 @@
      android:background="@drawable/circle_shape"
      android:backgroundTint="@color/grey"
      android:alpha="0.3"
+
      />
 
 

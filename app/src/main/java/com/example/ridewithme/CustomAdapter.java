@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.LightingColorFilter;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
@@ -45,9 +47,11 @@ public class CustomAdapter extends ArrayAdapter<TrempData>  {
 
     private TextView name  ,phone ,date_time ,msg , extra,uid ;
     private ImageButton deleteTremp , editTremp , phoneBtn ;
+    private ImageView sideview;
     private int layoutResource;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
+
 
 
     public CustomAdapter(Context context, int layoutResource, ArrayList<TrempData> list) {
@@ -82,10 +86,12 @@ public class CustomAdapter extends ArrayAdapter<TrempData>  {
             deleteTremp = (ImageButton)view.findViewById(R.id.remove);
             editTremp = (ImageButton)view.findViewById(R.id.edit);
             phoneBtn = (ImageButton)view.findViewById(R.id.phone_btn);
+            sideview = (ImageView)view.findViewById(R.id.user_image);
 
             if (name != null & phone != null & msg != null & date_time != null & uid != null) {
                 name.setText(data.get_name());
                 name.setTextColor(randomAndroidColor);
+
                 phone.setText(data.get_phone());
                 date_time.setText(data.get_timestamp());
                 msg.setText(data.get_from() + "--> " + data.get_to() + ", " + data.get_date() + ", " + data.get_time());
@@ -133,11 +139,13 @@ public class CustomAdapter extends ArrayAdapter<TrempData>  {
                     deleteTremp.setVisibility(View.VISIBLE);
                     editTremp.setVisibility(View.VISIBLE);
                     phoneBtn.setVisibility(View.GONE);
+                    sideview.setColorFilter(Color.rgb(255,164,30));
                 }
                 else{
                     deleteTremp.setVisibility(View.GONE);
                     editTremp.setVisibility(View.GONE);
                     phoneBtn.setVisibility(View.VISIBLE);
+                    sideview.setColorFilter(Color.rgb(176,176,176));
                 }
             }
         }

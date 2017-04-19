@@ -2,14 +2,25 @@ package com.example.ridewithme;
 
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,6 +49,7 @@ public class MainScreen extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabase;
     private ProgressDialog progressDialog;
+    private BottomNavigationView mBottomBar;
 
 
 
@@ -52,16 +64,53 @@ public class MainScreen extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mListView = (ListView) findViewById(R.id.mListView);
-        searchBtn = (ImageButton) findViewById(R.id.search);
-        addBtn = (ImageButton) findViewById(R.id.add2);
-        webBtn = (ImageButton) findViewById(R.id.web);
-        logoutbtn = (ImageButton) findViewById(R.id.logout);
-        personalZone = (ImageButton) findViewById(R.id.myzone);
-        adapter = new CustomAdapter(this, R.layout.listview_row, dataArrayList);
+        //searchBtn = (ImageButton) findViewById(R.id.search);
+        //addBtn = (ImageButton) findViewById(R.id.add2);
+        //webBtn = (ImageButton) findViewById(R.id.web);
+        //logoutbtn = (ImageButton) findViewById(R.id.logout);
+        //personalZone = (ImageButton) findViewById(R.id.myzone);
+        mBottomBar = (BottomNavigationView) findViewById(R.id.navigation);
+        adapter = new CustomAdapter(this, R.layout.testrow, dataArrayList);
         mListView.setAdapter(adapter);
         retrieveData();
 
-        //mListView.setEmptyView(findViewById(R.id.emptylist1));
+
+
+        mBottomBar.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            /*case R.id.logout:
+                                mAuth.signOut();
+                                break;*/
+
+                            /*case R.id.web:
+                                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/groups/114964358535991/"));
+                                startActivity(i);
+                                break;*/
+
+                            case R.id.add2:
+                                FragmentManager manager2 = getFragmentManager();
+                                Addtremp trempDialog2 = new Addtremp();
+                                trempDialog2.show(manager2, "Addtremp");
+                                break;
+
+                            case R.id.search:
+                                FragmentManager manager = getFragmentManager();
+                                SearchTremp trempDialog = new SearchTremp();
+                                trempDialog.show(manager, "Searchtremp");
+                                break;
+
+                            case R.id.myzone:
+                                Intent intent = new Intent(MainScreen.this, PersonalZone.class);
+                                startActivity(intent);
+                                //overridePendingTransition  (R.anim.slide_in, R.anim.slide_in);
+                                break;
+                        }
+                        return true;
+                    }
+                });
 
 
 
@@ -75,7 +124,8 @@ public class MainScreen extends AppCompatActivity {
                 }
             }
         };
-        logoutbtn.setOnClickListener(new View.OnClickListener() {
+
+        /*logoutbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mAuth.signOut();
@@ -85,6 +135,7 @@ public class MainScreen extends AppCompatActivity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 FragmentManager manager = getFragmentManager();
                 Addtremp trempDialog = new Addtremp();
                 trempDialog.show(manager, "Addtremp");
@@ -94,6 +145,7 @@ public class MainScreen extends AppCompatActivity {
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 FragmentManager manager = getFragmentManager();
                 SearchTremp trempDialog = new SearchTremp();
                 trempDialog.show(manager, "Searchtremp");
@@ -103,6 +155,7 @@ public class MainScreen extends AppCompatActivity {
         webBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/groups/114964358535991/"));
                 startActivity(i);
             }
@@ -111,10 +164,13 @@ public class MainScreen extends AppCompatActivity {
         personalZone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 Intent intent = new Intent(MainScreen.this, PersonalZone.class);
                 startActivity(intent);
+                overridePendingTransition  (R.anim.slide_in, R.anim.slide_in);
             }
-        });
+        });*/
 
     }
 
@@ -157,14 +213,11 @@ public class MainScreen extends AppCompatActivity {
     }
 
 
-
-
     public void getUpdates(DataSnapshot dataSnapshot) {
         dataArrayList.clear();
 
         for (DataSnapshot str : dataSnapshot.getChildren()) {
             TrempData trempData = new TrempData();
-
             trempData.set_key(str.getValue(TrempData.class).get_key());
             trempData.set_uid(str.getValue(TrempData.class).get_uid());
             trempData.set_name(str.getValue(TrempData.class).get_name());

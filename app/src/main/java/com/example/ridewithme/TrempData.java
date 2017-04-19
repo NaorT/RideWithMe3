@@ -1,5 +1,7 @@
 package com.example.ridewithme;
 
+import android.net.Uri;
+
 public class TrempData {
 
     public String _name;
@@ -26,6 +28,7 @@ public class TrempData {
         this._timestamp = _timestamp;
         this._uid = _uid;
         this._key = _key;
+
 
     }
 

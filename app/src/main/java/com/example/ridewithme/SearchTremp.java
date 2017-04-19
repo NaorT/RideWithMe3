@@ -38,6 +38,7 @@ public class SearchTremp extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.searchdialog, null);
         getDialog().getWindow().setBackgroundDrawableResource(R.drawable.dialog_drawable);
+        getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 
         //INITIALIZE DATA_BASE AND VIEWS
         progressDialog = new ProgressDialog(getActivity());

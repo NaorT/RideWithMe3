@@ -19,9 +19,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.concurrent.Executor;
+import org.w3c.dom.Text;
 
 /**
  * Created by Naor on 28/01/2017.
@@ -30,9 +31,12 @@ import java.util.concurrent.Executor;
 public class SignIn extends DialogFragment {
 
     private TextView textView;
-    private EditText email,password;
+    private EditText et_email, et_password;
     private Button signIn;
     private ProgressDialog progressDialog;
+    private TextView comment;
+    private DatabaseReference mDatabase;
+
     //LoginActivity loginActivity;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -43,48 +47,68 @@ public class SignIn extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_signin, null);
+        getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 
         //INITIALIZE DATA_BASE AND VIEWS
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         //loginActivity = new LoginActivity();
-        email = (EditText) v.findViewById(R.id.signin_email);
-        password = (EditText) v.findViewById(R.id.signin_password);
+        et_email = (EditText) v.findViewById(R.id.signin_email);
+        et_password = (EditText) v.findViewById(R.id.signin_password);
         textView = (TextView) v.findViewById(R.id.tv) ;
+        comment = (TextView)v.findViewById(R.id.tv7) ;
         signIn = (Button) v.findViewById(R.id.signin_btn);
         progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("אנא המתן.");
+        progressDialog.setCanceledOnTouchOutside(false);
+
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 createUser();
-
             }
         });
-
         return v;
     }
 
 
     public void createUser(){
-        String email1 = email.getText().toString();
-        String password1 = password.getText().toString();
-        progressDialog.setMessage("אנא המתן. מיד תועבר ללוח הטרמפים");
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.show();
+        final String email = et_email.getText().toString();
+        final String password = et_password.getText().toString();
 
-        if(TextUtils.isEmpty(email1) || TextUtils.isEmpty(password1) ){
-            progressDialog.dismiss();
-            Toast.makeText(getActivity(),"אנא בדוק שמילאת הכל",Toast.LENGTH_LONG).show();
+
+        if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password) ){
+
+            comment.setText("אחד מהשדות ריק. אנא מלא הכל ונסה שנית. הסיסמה צריכה להכיל לפחות 6 תווים");
+            comment.setVisibility(View.VISIBLE);
         }
+
         else{
-            mAuth.createUserWithEmailAndPassword(email1, password1).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+            progressDialog.show();
+            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
 
+
+
                     if (!task.isSuccessful()) {
-                        progressDialog.dismiss();
-                        Toast.makeText(getActivity(), "ישנה בעיה",Toast.LENGTH_SHORT).show();
+
+                        if(password.length() < 6){
+                            comment.setText("על הסיסמא להכיל 6 תווים לפחות");
+                            comment.setVisibility(View.VISIBLE);
+                            progressDialog.dismiss();
+                        }
                     }
-                    else startActivity(new Intent(getActivity() , MainScreen.class));
+
+                    else{
+/*
+                        DatabaseReference db = mDatabase.child("users");
+                        db.child("email").setValue(email);
+                        db.child("images").setValue("default");*/
+
+
+                        startActivity(new Intent(getActivity() , MainScreen.class));
+                    }
 
                 }
             });

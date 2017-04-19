@@ -3,13 +3,18 @@ package com.example.ridewithme;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 
@@ -18,6 +23,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
@@ -30,7 +36,7 @@ public class Addtremp extends DialogFragment {
     public EditText name, phone, from, to, date, time, extra;
     public Button send_btn;
     private DatabaseReference mDatabase;
-    public String str_key, str_uid, str_name, str_phone, str_from, str_to, str_date, str_time, str_extra, str_timestamp, send_time, send_time2;
+    public String str_key, str_uid, str_name, str_phone, str_from, str_to, str_date, str_time, str_extra, str_timestamp, send_time2;
     public TrempData trempData;
     private FirebaseAuth mAuth;
     private MyDatePicker myDatePicker;
@@ -49,12 +55,16 @@ public class Addtremp extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.adddialog, null);
         getDialog().getWindow().setBackgroundDrawableResource(R.drawable.dialog_drawable);
+        getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+
         //INITIALIZE DATA_BASE AND VIEWS
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Posts");
         mAuth = FirebaseAuth.getInstance();
 
         //timeStamp
-        final SimpleDateFormat dateFormat1 = new SimpleDateFormat("HH:mm:ss");
+        final SimpleDateFormat dateFormat1 = new SimpleDateFormat("HH:mm");
         dateFormat1.setTimeZone(TimeZone.getTimeZone("GMT+2"));
         send_time2 = dateFormat1.format(new Date());
         //Initialize views
@@ -68,6 +78,7 @@ public class Addtremp extends DialogFragment {
         myTimePicker = new MyTimePicker(getActivity(),time);
         extra = (EditText) v.findViewById(R.id.extra);
         send_btn = (Button) v.findViewById(R.id.add2) ;
+
 
         send_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,11 +130,9 @@ public class Addtremp extends DialogFragment {
                     return;
                 }
 
-
                 DatabaseReference newPost = mDatabase.push();
                 str_key = newPost.getKey();
                 trempData = new TrempData(str_key, str_uid, str_name, str_phone, str_from, str_to, str_date, str_time, str_extra, str_timestamp);
-
                 newPost.setValue(trempData);
                 Toast.makeText(getActivity(), "הטרמפ נוסף בהצלחה", Toast.LENGTH_SHORT).show();
                 dismiss();
@@ -133,6 +142,14 @@ public class Addtremp extends DialogFragment {
         });
         return v;
     }
+    //this method set the dialog fragment to full screen
+   /* public void onActivityCreated(Bundle savedInstanceState){
+        super.onActivityCreated(savedInstanceState);
+        Window window = getDialog().getWindow();
+        WindowManager.LayoutParams attributes = window.getAttributes();
+        window.setLayout(attributes.MATCH_PARENT, attributes.MATCH_PARENT);
+
+    }*/
 }
 
 interface StartCommunication{
