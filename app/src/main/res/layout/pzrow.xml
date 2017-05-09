@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/listrow_drawable"
+    android:elevation="5dp"
+    android:gravity="center_horizontal"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+
+
+    >
+
+    <ImageView
+        android:layout_marginRight="100dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/timeline3"
+        android:id="@+id/pztimeline"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="10dp"/>
+
+    <ImageView
+
+        android:id="@+id/pzmycar"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/ic_action_car"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="13dp"
+        android:layout_alignTop="@+id/pzmydate"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_marginRight="5dp"
+        android:background="@color/transparent"
+        android:id="@+id/switchImage_btn"
+        android:text="החלף תמונה"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pzmyextra"
+        android:layout_alignParentEnd="true"
+        android:onClick="setprofileImage"/>
+
+    <EditText
+        android:enabled="false"
+        android:background="@color/transparent"
+        style="@android:style/Widget.TextView"
+        android:gravity="center_horizontal"
+        android:id="@+id/pzmyname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_alignTop="@+id/pztimeline"
+        android:layout_alignEnd="@+id/pzmycar"
+        android:layout_alignStart="@+id/pzmycar" />
+
+    <EditText
+        android:enabled="false"
+        android:background="@color/transparent"
+        style="@android:style/Widget.TextView"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/pzmyfrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_alignParentTop="true"
+        android:layout_alignEnd="@+id/pzmydate" />
+
+    <EditText
+        android:enabled="false"
+        android:background="@color/transparent"
+        style="@android:style/Widget.TextView"
+
+        android:layout_marginRight="3dp"
+        android:id="@+id/pzmyto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_alignBottom="@+id/pztimeline"
+        android:layout_alignEnd="@+id/pzmyextra" />
+
+    <EditText
+        android:enabled="false"
+        android:background="@color/transparent"
+        style="@android:style/Widget.TextView"
+        android:layout_marginBottom="3dp"
+        android:layout_marginTop="2dp"
+        android:id="@+id/pzmydate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_below="@+id/pzmyfrom"
+        android:layout_toStartOf="@+id/pztimeline" />
+
+    <EditText
+        android:enabled="false"
+        android:background="@color/transparent"
+        style="@android:style/Widget.TextView"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="1dp"
+        android:id="@+id/pzmytime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_below="@+id/pzmydate"
+        android:layout_toStartOf="@+id/pztimeline" />
+
+    <EditText
+        android:enabled="false"
+        android:background="@color/transparent"
+        style="@android:style/Widget.TextView"
+        android:layout_marginRight="3dp"
+        android:id="@+id/pzmyextra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_below="@+id/pzmytime"
+        android:layout_toStartOf="@+id/pztimeline"
+        android:layout_alignEnd="@+id/pzmydate"
+        android:gravity="right"/>
+
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/pzmyphone"
+        android:background="@mipmap/ic_phone"
+        android:onClick="makePhoneCall"
+        android:layout_marginLeft="5dp"
+        android:layout_alignBottom="@+id/pzmyto"
+        android:layout_alignStart="@+id/pzmytimestamp"
+        android:visibility="gone"/>
+
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/pzremove"
+        android:background="@mipmap/ic_remove"
+        android:onClick="makePhoneCall"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@+id/pzmyto"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/pzedit"
+        android:background="@mipmap/ic_edit"
+        android:onClick="makePhoneCall"
+        android:layout_alignTop="@+id/pzremove"
+        android:layout_toEndOf="@+id/pzremove" />
+
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/pzsubmit_edit"
+        android:background="@mipmap/ic_launcher_submittext"
+        android:onClick="makePhoneCall"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@+id/pzedit"
+        android:layout_toEndOf="@+id/pzedit"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/pzmyuid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/pzmytimestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        />
+
+
+
+
+</RelativeLayout>

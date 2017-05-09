@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <!--<item
+        android:id="@+id/logout"
+        android:icon="@drawable/ic_action_logout"
+        android:title="התנתק"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        />-->
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_action_search"
+        android:title="חפש טרמפ"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        />
+
+    <item
+        android:id="@+id/add2"
+        android:icon="@drawable/ic_action_add"
+        android:title="הצע טרמפ"
+        app:showAsAction="ifRoom"
+        android:enabled="true"/>
+    <item
+        android:id="@+id/myzone"
+        android:enabled="true"
+        android:icon="@drawable/ic_action_myzone"
+        android:title="איזור אישי" />
+
+        <!--<item
+            android:id="@+id/web"
+            android:icon="@drawable/ic_action_web"
+            android:title="פייסבוק"
+            app:showAsAction="ifRoom"
+            android:enabled="true"/>-->
+
+</menu>
