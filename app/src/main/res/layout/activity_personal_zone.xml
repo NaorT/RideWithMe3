@@ -10,7 +10,7 @@
     tools:context="com.example.ridewithme.PersonalZone">
 
     <RelativeLayout
-
+        android:layout_marginBottom="5dp"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:background="@color/light_blue"
@@ -20,40 +20,29 @@
 
 
 
-    <TextView
-        android:id="@+id/pz_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="איזור אישי"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        android:layout_marginRight="10dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
+        <TextView
+            android:id="@+id/pz_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="איזור אישי"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
 
-    <TextView
-        android:id="@+id/pz_tv2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="כאן תוכל למחוק או לערוך את הטרמפים שלך"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:layout_alignTop="@+id/pz_tv"
-        android:layout_alignEnd="@+id/pz_tv"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="10dp"/>
-    
-    <ImageButton
-        android:scaleType="centerCrop"
-        android:background="@color/transparent"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/profile_image"
-        android:src="@mipmap/ic_default_image"
-        android:layout_below="@+id/pz_tv2"
-        android:layout_centerHorizontal="true"
-        android:visibility="gone"
-        />
+        <TextView
+            android:id="@+id/pz_tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="כאן תוכל למחוק או לערוך את הטרמפים שלך"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_alignTop="@+id/pz_tv"
+            android:layout_alignEnd="@+id/pz_tv"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="10dp"/>
+
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/logout"
@@ -61,7 +50,6 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_launcher_exit"
             android:layout_below="@+id/pz_tv2"
-            android:layout_toEndOf="@+id/profile_image"
             android:layout_marginStart="12dp"
             app:borderWidth="0dp"
             android:backgroundTint="@color/white"
@@ -82,6 +70,8 @@
             />
 
 
+
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -92,30 +82,30 @@
         android:id="@+id/viewB"
         >
 
-    <ListView
-        android:id="@+id/myzone_listview"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:dividerHeight="1dp"
-        android:divider="#f1f1f1"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
+        <ListView
+            android:id="@+id/myzone_listview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:dividerHeight="10dp"
+            android:divider="#f1f1f1"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
 
-        >
+            >
 
-    </ListView>
+        </ListView>
 
-    <TextView
-        android:id="@+id/emptylist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="אין תוכן להציג"
-        android:textSize="30dp"
-        android:layout_gravity="center"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:visibility="gone"
-        />
+        <TextView
+            android:id="@+id/emptylist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="אין תוכן להציג"
+            android:textSize="30dp"
+            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            />
     </RelativeLayout>
 
     <Button

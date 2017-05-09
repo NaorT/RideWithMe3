@@ -41,9 +41,7 @@ public class Addtremp extends DialogFragment {
     private FirebaseAuth mAuth;
     private MyDatePicker myDatePicker;
     private MyTimePicker myTimePicker;
-
-
-
+    public String _image;
 
 
     public Addtremp() {
@@ -94,8 +92,10 @@ public class Addtremp extends DialogFragment {
                 str_extra = extra.getText().toString();
                 str_timestamp = send_time2;
                 str_uid = mAuth.getCurrentUser().getUid();
+                _image = "default";
 
-                trempData = new TrempData(str_key, str_uid, str_name, str_phone, str_from, str_to, str_date, str_time, str_extra, str_timestamp);
+
+                trempData = new TrempData(_image,str_key, str_uid, str_name, str_phone, str_from, str_to, str_date, str_time, str_extra, str_timestamp);
                 if (name.length() == 0) {
                     name.requestFocus();
                     name.setHintTextColor(Color.RED);
@@ -132,7 +132,7 @@ public class Addtremp extends DialogFragment {
 
                 DatabaseReference newPost = mDatabase.push();
                 str_key = newPost.getKey();
-                trempData = new TrempData(str_key, str_uid, str_name, str_phone, str_from, str_to, str_date, str_time, str_extra, str_timestamp);
+                trempData = new TrempData(_image,str_key, str_uid, str_name, str_phone, str_from, str_to, str_date, str_time, str_extra, str_timestamp);
                 newPost.setValue(trempData);
                 Toast.makeText(getActivity(), "הטרמפ נוסף בהצלחה", Toast.LENGTH_SHORT).show();
                 dismiss();
@@ -143,20 +143,16 @@ public class Addtremp extends DialogFragment {
         return v;
     }
     //this method set the dialog fragment to full screen
-   /* public void onActivityCreated(Bundle savedInstanceState){
+    public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
         Window window = getDialog().getWindow();
         WindowManager.LayoutParams attributes = window.getAttributes();
         window.setLayout(attributes.MATCH_PARENT, attributes.MATCH_PARENT);
 
-    }*/
+    }
 }
 
-interface StartCommunication{
-    public void setComm(DataSnapshot dataSnapshot);
 
-
-}
 
 
 

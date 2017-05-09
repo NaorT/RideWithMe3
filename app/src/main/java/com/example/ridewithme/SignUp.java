@@ -10,10 +10,11 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,16 +23,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.w3c.dom.Text;
-
 /**
  * Created by Naor on 28/01/2017.
  */
 
-public class SignIn extends DialogFragment {
+public class SignUp extends DialogFragment {
 
     private TextView textView;
-    private EditText et_email, et_password;
+    private EditText et_email, et_password , et_name , et_phone;
     private Button signIn;
     private ProgressDialog progressDialog;
     private TextView comment;
@@ -41,20 +40,22 @@ public class SignIn extends DialogFragment {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-    public SignIn(){}
+    public SignUp(){}
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.activity_signin, null);
+        View v = inflater.inflate(R.layout.newsignup, null);
         getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 
         //INITIALIZE DATA_BASE AND VIEWS
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
-        //loginActivity = new LoginActivity();
+
         et_email = (EditText) v.findViewById(R.id.signin_email);
         et_password = (EditText) v.findViewById(R.id.signin_password);
+        et_name = (EditText) v.findViewById(R.id.signin_name);
+        et_phone = (EditText) v.findViewById(R.id.signin_phone);
         textView = (TextView) v.findViewById(R.id.tv) ;
         comment = (TextView)v.findViewById(R.id.tv7) ;
         signIn = (Button) v.findViewById(R.id.signin_btn);
@@ -73,13 +74,17 @@ public class SignIn extends DialogFragment {
 
 
     public void createUser(){
+
         final String email = et_email.getText().toString();
         final String password = et_password.getText().toString();
+        final String name = et_name.getText().toString();
+        final String phone = et_phone.getText().toString();
+        final User user = new User(name,phone,email,password);
 
 
         if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password) ){
 
-            comment.setText("אחד מהשדות ריק. אנא מלא הכל ונסה שנית. הסיסמה צריכה להכיל לפחות 6 תווים");
+            //comment.setText("אחד מהשדות ריק. אנא מלא הכל ונסה שנית. הסיסמה צריכה להכיל לפחות 6 תווים");
             comment.setVisibility(View.VISIBLE);
         }
 
@@ -88,8 +93,6 @@ public class SignIn extends DialogFragment {
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-
-
 
                     if (!task.isSuccessful()) {
 
@@ -101,10 +104,11 @@ public class SignIn extends DialogFragment {
                     }
 
                     else{
-/*
-                        DatabaseReference db = mDatabase.child("users");
-                        db.child("email").setValue(email);
-                        db.child("images").setValue("default");*/
+
+
+                        DatabaseReference db = mDatabase.child("Users").child(mAuth.getCurrentUser().getUid());
+                        db.setValue(user);
+
 
 
                         startActivity(new Intent(getActivity() , MainScreen.class));
@@ -114,5 +118,6 @@ public class SignIn extends DialogFragment {
             });
         }
     }
+
 
 }
