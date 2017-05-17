@@ -156,7 +156,7 @@ public class personalZoneAdapter extends ArrayAdapter<TrempData>  {
                 }
             });
 
-            
+
             viewHolder.deleteTremp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
