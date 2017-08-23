@@ -16,9 +16,7 @@
         android:background="@color/light_blue"
         android:id="@+id/viewA"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/submitImage">
-
-
+        >
 
         <TextView
             android:id="@+id/pz_tv"
@@ -27,6 +25,7 @@
             android:text="איזור אישי"
             android:textColor="@color/white"
             android:textSize="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true" />
@@ -65,11 +64,10 @@
             android:layout_toEndOf="@+id/logout"
             android:layout_marginStart="8dp"
             app:borderWidth="0dp"
+            android:visibility="gone"
             android:backgroundTint="@color/white"
 
             />
-
-
 
 
     </RelativeLayout>
@@ -85,15 +83,13 @@
         <ListView
             android:id="@+id/myzone_listview"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="370dp"
             android:dividerHeight="10dp"
             android:divider="#f1f1f1"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/emptylist" />
 
-            >
 
-        </ListView>
 
         <TextView
             android:id="@+id/emptylist"
@@ -106,15 +102,25 @@
             android:layout_centerVertical="true"
             android:visibility="gone"
             />
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/navigationpz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:itemBackground="@color/light_blue"
+            app:itemIconTint="@color/white"
+            app:itemTextColor="@color/white"
+            app:menu="@menu/bottom_nav_items"
+
+            />
+
+
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/submitImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="אשר תמונה"
-        android:layout_centerHorizontal="true"
-        android:visibility="gone"/>
+
+
+
 
 
 </RelativeLayout>

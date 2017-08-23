@@ -1,12 +1,17 @@
 package com.example.ridewithme;
 
 
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputType;
@@ -37,6 +42,8 @@ import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.FileDescriptor;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -46,27 +53,25 @@ import static android.graphics.Color.GRAY;
 import static android.graphics.Color.TRANSPARENT;
 import static android.graphics.Color.WHITE;
 import static com.example.ridewithme.R.id.mListView;
-import static com.example.ridewithme.R.id.submitText;
-import static com.example.ridewithme.R.id.switchImage_btn;
+//import static com.example.ridewithme.R.id.submitText;
+
 
 
 public class personalZoneAdapter extends ArrayAdapter<TrempData>  {
 
-    private StorageReference mStorage;
-    private Uri mImageUri ,downloadUri ;
-    private static final int GALLERY_INTENT = 2 ;
+
     private int layoutResource;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
+    MyDatePicker myDatePicker;
+    MyTimePicker myTimePicker;
 
-
-
-    static class ViewHolderItem{
+    static class ViewHolderItem {
         private TextView uid ,timestamp;
         private EditText name  , from,to,date,time,extra;
         private ImageButton deleteTremp , editTremp , phoneBtn , submitText ;
         private ImageView car,timeline;
-        private Button switvhImage_btn;
+
     }
 
 
@@ -75,7 +80,6 @@ public class personalZoneAdapter extends ArrayAdapter<TrempData>  {
         this.layoutResource = layoutResource;
         firebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mStorage = FirebaseStorage.getInstance().getReference();
     }
 
     @Override
@@ -93,10 +97,9 @@ public class personalZoneAdapter extends ArrayAdapter<TrempData>  {
             viewHolder.extra = (EditText) view.findViewById(R.id.pzmyextra);
             viewHolder.uid = (TextView) view.findViewById(R.id.pzmyuid);
             viewHolder.deleteTremp = (ImageButton)view.findViewById(R.id.pzremove);
-            viewHolder.editTremp = (ImageButton)view.findViewById(R.id.pzedit);
+            //viewHolder.editTremp = (ImageButton)view.findViewById(R.id.pzedit);
             viewHolder.phoneBtn = (ImageButton)view.findViewById(R.id.pzmyphone);
             viewHolder.submitText = (ImageButton)view.findViewById(R.id.pzsubmit_edit);
-            viewHolder.switvhImage_btn = (Button) view.findViewById(R.id.switchImage_btn);
             viewHolder.car = (ImageView)view.findViewById(R.id.pzmycar);
             viewHolder.timeline = (ImageView)view.findViewById(R.id.pztimeline);
             viewHolder.date = (EditText) view.findViewById(R.id.pzmydate);
@@ -107,10 +110,10 @@ public class personalZoneAdapter extends ArrayAdapter<TrempData>  {
         }
         else{
             viewHolder = (ViewHolderItem) convertView.getTag();
+
         }
 
         final TrempData data = getItem(position);
-
 
         //int[] androidColors = getContext().getResources().getIntArray(R.array.androidcolors);
         //int randomAndroidColor = androidColors[new Random().nextInt(androidColors.length)];
@@ -126,27 +129,56 @@ public class personalZoneAdapter extends ArrayAdapter<TrempData>  {
             viewHolder.from.setText(data.get_from());
             viewHolder.extra.setText(data.get_extras());
 
-            viewHolder.editTremp.setOnClickListener(new View.OnClickListener() {
+            /*viewHolder.editTremp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     viewHolder.submitText.setVisibility(View.VISIBLE);
-                    setEditable(viewHolder.from);
+                    viewHolder.from.setEnabled(true);
+                    viewHolder.to.setEnabled(true);
+                    viewHolder.extra.setEnabled(true);
+                    viewHolder.date.setEnabled(true);
+                    myDatePicker = new MyDatePicker(getContext(),viewHolder.date);
+                    viewHolder.time.setEnabled(true);
+                    myTimePicker = new MyTimePicker(getContext(),viewHolder.time);
+                    viewHolder.from.setBackgroundColor(GRAY);
+                    viewHolder.to.setBackgroundColor(GRAY);
+                    viewHolder.extra.setBackgroundColor(GRAY);
+                    viewHolder.date.setBackgroundColor(GRAY);
+                    viewHolder.time.setBackgroundColor(GRAY);
 
                 }
-            });
+            });*/
 
-            viewHolder.submitText.setOnClickListener(new View.OnClickListener() {
+           /* viewHolder.submitText.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    String new_from = viewHolder.from.getText().toString();
-                    data.set_from(new_from);
+                    //   String new_from = viewHolder.from.getText().toString();
+                    //   String new_to = viewHolder.to.getText().toString();
+                    //   String new_extra = viewHolder.extra.getText().toString();
+                    // String new_date = viewHolder.date.getText().toString();
+                    // String new_time = viewHolder.time.getText().toString();
+                    //   data.set_from(new_from);
+                    //   data.set_to(new_to);
+                    //   data.set_extras(new_extra);
+                    //    data.set_date(new_date);
+                    //   data.set_time(new_time);
                     cancelEditable(viewHolder.from);
+                    cancelEditable(viewHolder.to);
+                    cancelEditable(viewHolder.extra);
+                    cancelEditable(viewHolder.date);
+                    cancelEditable(viewHolder.time);
                     viewHolder.submitText.setVisibility(View.GONE);
-                    mDatabase.child(getItem(position).get_key().toString()).child("_from").setValue(new_from);
+                    mDatabase.child("Posts").child(data.get_key().toString()).child("_from").setValue(viewHolder.from.getText().toString());
+                    mDatabase.child("Posts").child(data.get_key().toString()).child("_to").setValue(viewHolder.to.getText().toString());
+                    mDatabase.child("Posts").child(data.get_key().toString()).child("_extras").setValue(viewHolder.extra.getText().toString());
+                    mDatabase.child("Posts").child(data.get_key().toString()).child("_date").setValue(viewHolder.date.getText().toString());
+                    mDatabase.child("Posts").child(data.get_key().toString()).child("_time").setValue(viewHolder.time.getText().toString());
+
 
                 }
-            });
+            });*/
 
             viewHolder.phoneBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -157,12 +189,13 @@ public class personalZoneAdapter extends ArrayAdapter<TrempData>  {
             });
 
 
+
             viewHolder.deleteTremp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mDatabase.child("Posts").child(data.get_key()).removeValue();
                     notifyDataSetChanged();
-                    Toast.makeText(getContext(),"Tremp deleted!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"הטרמפ נמחק בהצלחה",Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -181,15 +214,7 @@ public class personalZoneAdapter extends ArrayAdapter<TrempData>  {
         return view;
     }
 
-    public void setEditable(EditText v){
 
-        v.setBackground(new ColorDrawable(GRAY));
-        v.setEnabled(true);
-        v.setCursorVisible(true);
-        v.setFocusableInTouchMode(true);
-        v.setInputType(InputType.TYPE_CLASS_TEXT);
-        v.requestFocus();
-    }
 
     public void cancelEditable(EditText v){
         v.setEnabled(false);

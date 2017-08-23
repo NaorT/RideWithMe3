@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="40dp"
+    android:paddingBottom="20dp"
 
 
     >
@@ -13,8 +13,9 @@
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/new_tremp_dialog_header">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/new_tremp_dialog_header"
+        android:paddingTop="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -39,7 +40,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
-
+                android:textSize="14dp"
                 android:paddingRight="5dp"
                 android:gravity="right|center"
                 android:layout_alignParentStart="true"
@@ -56,7 +57,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:paddingRight="5dp"
-
+                android:textSize="14dp"
                 android:gravity="right|center"
                 android:layout_below="@+id/name"
                 android:layout_alignParentStart="true"
@@ -75,7 +76,7 @@
                 android:layout_marginLeft="20dp"
                 android:paddingRight="5dp"
                 android:layout_below="@+id/phone"
-
+                android:textSize="14dp"
                 android:gravity="right|center"
                 android:drawableLeft="@drawable/ic_action_from"
 
@@ -90,7 +91,7 @@
                 android:layout_marginLeft="20dp"
                 android:paddingRight="5dp"
                 android:layout_below="@+id/from"
-
+                android:textSize="14dp"
                 android:gravity="right|center"
                 android:drawableLeft="@drawable/ic_action_to"
 
@@ -103,7 +104,7 @@
                 android:hint="תאריך"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
-
+                android:textSize="14dp"
                 android:gravity="right|center"
                 android:layout_below="@+id/to"
                 android:layout_alignParentStart="true"
@@ -122,7 +123,7 @@
                 android:gravity="right|center"
                 android:focusable="false"
                 android:layout_below="@+id/date"
-
+                android:textSize="14dp"
                 android:layout_alignParentStart="true"
                 android:paddingRight="5dp"
                 android:drawableLeft="@drawable/ic_action_time"/>
@@ -139,6 +140,7 @@
                 android:drawableLeft="@drawable/ic_action_comment"
                 android:paddingRight="5dp"
                 android:maxLength="25"
+                android:textSize="14dp"
                 />
 
         </RelativeLayout>
@@ -168,9 +170,8 @@
 
     </RelativeLayout>
 
-
     <Button
-        android:id="@+id/add2"
+        android:id="@+id/add3"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:background="@drawable/btn_drawable2"
@@ -178,10 +179,11 @@
         android:text="שלח"
         android:textColor="@color/light_blue"
         android:elevation="8dp"
+        android:layout_marginStart="28dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="14dp" />
 
-        android:layout_marginStart="26dp"
-        android:layout_marginBottom="14dp"
-        android:layout_above="@+id/scroll"
-        android:layout_alignParentStart="true" />
+
 
 </RelativeLayout>

@@ -13,7 +13,7 @@
     >
 
     <ImageView
-        android:layout_marginRight="100dp"
+        android:layout_marginRight="90dp"
         android:layout_marginTop="10dp"
         android:src="@drawable/timeline3"
         android:id="@+id/pztimeline"
@@ -30,20 +30,9 @@
         android:layout_height="70dp"
         android:src="@drawable/ic_action_car"
         android:layout_marginRight="5dp"
-        android:layout_marginEnd="13dp"
-        android:layout_alignTop="@+id/pzmydate"
+        android:layout_marginEnd="12dp"
+        android:layout_below="@+id/pzmyname"
         android:layout_alignParentEnd="true" />
-
-    <Button
-        android:layout_marginRight="5dp"
-        android:background="@color/transparent"
-        android:id="@+id/switchImage_btn"
-        android:text="החלף תמונה"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/pzmyextra"
-        android:layout_alignParentEnd="true"
-        android:onClick="setprofileImage"/>
 
     <EditText
         android:enabled="false"
@@ -56,73 +45,79 @@
         android:textColor="@color/black"
         android:layout_alignTop="@+id/pztimeline"
         android:layout_alignEnd="@+id/pzmycar"
-        android:layout_alignStart="@+id/pzmycar" />
+        android:layout_alignStart="@+id/pzmycar"
+        android:textSize="12dp"/>
 
     <EditText
         android:enabled="false"
         android:background="@color/transparent"
         style="@android:style/Widget.TextView"
-        android:layout_marginRight="3dp"
         android:layout_marginTop="5dp"
+        android:layout_marginRight="0dp"
         android:id="@+id/pzmyfrom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
+        android:textSize="12dp"
+
         android:layout_alignParentTop="true"
-        android:layout_alignEnd="@+id/pzmydate" />
+        android:layout_alignEnd="@+id/pzmytime" />
 
     <EditText
         android:enabled="false"
         android:background="@color/transparent"
         style="@android:style/Widget.TextView"
-
         android:layout_marginRight="3dp"
         android:id="@+id/pzmyto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
+        android:textSize="12dp"
+
         android:layout_alignBottom="@+id/pztimeline"
-        android:layout_alignEnd="@+id/pzmyextra" />
+        android:layout_toStartOf="@+id/pztimeline" />
 
     <EditText
+        android:layout_marginTop="7dp"
         android:enabled="false"
         android:background="@color/transparent"
         style="@android:style/Widget.TextView"
-        android:layout_marginBottom="3dp"
-        android:layout_marginTop="2dp"
         android:id="@+id/pzmydate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:layout_below="@+id/pzmyfrom"
+        android:textSize="12dp"
+
+        android:layout_below="@+id/pzmytimestamp"
         android:layout_toStartOf="@+id/pztimeline" />
 
     <EditText
         android:enabled="false"
         android:background="@color/transparent"
         style="@android:style/Widget.TextView"
-        android:layout_marginRight="3dp"
-        android:layout_marginBottom="1dp"
         android:id="@+id/pzmytime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:layout_below="@+id/pzmydate"
-        android:layout_toStartOf="@+id/pztimeline" />
+        android:textSize="12dp"
+        android:paddingBottom="3dp"
+        android:layout_centerVertical="true"
+        android:layout_alignEnd="@+id/pzmyto" />
 
     <EditText
         android:enabled="false"
         android:background="@color/transparent"
         style="@android:style/Widget.TextView"
-        android:layout_marginRight="3dp"
+        android:gravity="right"
         android:id="@+id/pzmyextra"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:layout_below="@+id/pzmytime"
+        android:textSize="12dp"
+        android:layout_alignBottom="@+id/pzmycar"
         android:layout_toStartOf="@+id/pztimeline"
-        android:layout_alignEnd="@+id/pzmydate"
-        android:gravity="right"/>
+        android:layout_marginBottom="7dp"
+        android:layout_alignEnd="@+id/pzmytime" />
 
     <ImageButton
         android:layout_width="30dp"
@@ -149,10 +144,11 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:id="@+id/pzedit"
+        android:onClick="onClick"
         android:background="@mipmap/ic_edit"
-        android:onClick="makePhoneCall"
         android:layout_alignTop="@+id/pzremove"
-        android:layout_toEndOf="@+id/pzremove" />
+        android:layout_toEndOf="@+id/pzremove"
+        />
 
     <ImageButton
         android:layout_width="30dp"
@@ -173,11 +169,12 @@
         android:visibility="gone"/>
 
     <TextView
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
         android:id="@+id/pzmytimestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="12dp"
         android:textColor="@color/black"
         />
 

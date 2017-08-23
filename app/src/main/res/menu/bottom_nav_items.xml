@@ -2,18 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-    <!--<item
-        android:id="@+id/logout"
-        android:icon="@drawable/ic_action_logout"
-        android:title="התנתק"
+    <item
+        android:id="@+id/mainscreen"
+        android:icon="@drawable/ic_action_mainscreen"
         app:showAsAction="ifRoom"
         android:enabled="true"
-        />-->
+        android:title="לוח" />
 
     <item
         android:id="@+id/search"
         android:icon="@drawable/ic_action_search"
-        android:title="חפש טרמפ"
+        android:title="חפש"
         app:showAsAction="ifRoom"
         android:enabled="true"
         />
@@ -21,20 +20,21 @@
     <item
         android:id="@+id/add2"
         android:icon="@drawable/ic_action_add"
-        android:title="הצע טרמפ"
+        android:title="הוסף"
         app:showAsAction="ifRoom"
         android:enabled="true"/>
     <item
         android:id="@+id/myzone"
         android:enabled="true"
         android:icon="@drawable/ic_action_myzone"
-        android:title="איזור אישי" />
+        android:title="איזור אישי"
+        app:showAsAction="ifRoom"/>
 
-        <!--<item
-            android:id="@+id/web"
-            android:icon="@drawable/ic_action_web"
-            android:title="פייסבוק"
-            app:showAsAction="ifRoom"
-            android:enabled="true"/>-->
+    <item
+        android:id="@+id/map"
+        android:icon="@drawable/ic_action_maps"
+        android:title="מפה"
+        app:showAsAction="ifRoom"
+        android:enabled="true"/>
 
 </menu>

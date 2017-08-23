@@ -79,7 +79,8 @@ public class SignUp extends DialogFragment {
         final String password = et_password.getText().toString();
         final String name = et_name.getText().toString();
         final String phone = et_phone.getText().toString();
-        final User user = new User(name,phone,email,password);
+        final String id = "default";
+        final User user = new User(name,phone,email,password,id);
 
 
         if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password) ){
@@ -104,13 +105,9 @@ public class SignUp extends DialogFragment {
                     }
 
                     else{
-
-
                         DatabaseReference db = mDatabase.child("Users").child(mAuth.getCurrentUser().getUid());
+                        user.setId(mAuth.getCurrentUser().getUid().toString());
                         db.setValue(user);
-
-
-
                         startActivity(new Intent(getActivity() , MainScreen.class));
                     }
 

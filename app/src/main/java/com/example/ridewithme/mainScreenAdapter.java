@@ -81,7 +81,6 @@ public class mainScreenAdapter extends ArrayAdapter<TrempData>  {
             from = (TextView) view.findViewById(R.id.myfrom);
             to = (TextView) view.findViewById(R.id.myto);
             myextra = (TextView) view.findViewById(R.id.myextra);
-
             name.setText(data.get_name());
             //name.setTextColor(randomAndroidColor);
             //myphonestr.setText(data.get_phone());

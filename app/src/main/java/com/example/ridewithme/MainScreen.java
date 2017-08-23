@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -35,12 +37,14 @@ public class MainScreen extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private ProgressDialog progressDialog;
     private BottomNavigationView mBottomBar;
+    private TextView tv3;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
+        tv3 = (TextView) findViewById(R.id.textView3);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("אנא המתן. לוח הטרמפים נטען");
         progressDialog.setCanceledOnTouchOutside(false);
@@ -49,6 +53,7 @@ public class MainScreen extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mListView = (ListView) findViewById(R.id.mListView);
         mBottomBar = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationViewHelper.disableShiftMode(mBottomBar);
         adapter = new mainScreenAdapter(this, R.layout.row, dataArrayList);
         mListView.setAdapter(adapter);
         updateMainScreen();
@@ -77,6 +82,15 @@ public class MainScreen extends AppCompatActivity {
                                 startActivity(intent);
                                 //overridePendingTransition  (R.anim.slide_in, R.anim.slide_in);
                                 break;
+
+                            case R.id.map:
+                                Intent intent1 = new Intent(MainScreen.this, MapActivity.class);
+                                startActivity(intent1);
+                                break;
+
+                            case R.id.mainscreen:
+                                // if user is in mainScreen do nothing
+                                break;
                         }
                         return true;
                     }
@@ -92,6 +106,24 @@ public class MainScreen extends AppCompatActivity {
                 }
             }
         };
+
+        mDatabase.child("Users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                    User user = ds.getValue(User.class);
+                    if(mAuth.getCurrentUser().getUid().toString().equals(user.getId().toString())){
+                        tv3.setText("שלום " + user.getName().toString());
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public void updateMainScreen() {
@@ -103,9 +135,11 @@ public class MainScreen extends AppCompatActivity {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     TrempData trempData2 = ds.getValue(TrempData.class);
                     dataArrayList.add(0, trempData2);
+
                 }
                 mListView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
+
             }
 
             @Override

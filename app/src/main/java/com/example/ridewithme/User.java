@@ -7,14 +7,29 @@ import android.net.Uri;
  */
 
 public class User {
-    private String name,phone,email,password;
+    private String name;
+    private String phone;
+    private String email;
+    private String password;
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
 
-    public User(String name, String phone, String email, String password) {
+
+
+    public User(String name, String phone, String email, String password, String id) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.password = password;
+        this.id = id;
 
     }
 
