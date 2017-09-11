@@ -41,8 +41,21 @@ public class MyTimePicker implements View.OnClickListener, TimePickerDialog.OnTi
     @Override
     public void onTimeSet(android.widget.TimePicker view, int hourOfDay, int minute) {
         // TODO Auto-generated method stub
-        if (minute < 10) this.editText.setText(hourOfDay + ":0" + minute);
-        else this.editText.setText(hourOfDay + ":" + minute);
+
+        if (hourOfDay < 10 && minute < 10){
+            this.editText.setText("0" + hourOfDay + ":" + "0" + minute);
+        }
+
+        else if(hourOfDay < 10 && minute > 9){
+            this.editText.setText("0" + hourOfDay + ":" + minute);
+        }
+        else if (hourOfDay > 9 && minute < 10){
+            this.editText.setText(hourOfDay + ":" + "0" + minute);
+        }
+
+
+
+
     }
 
 }

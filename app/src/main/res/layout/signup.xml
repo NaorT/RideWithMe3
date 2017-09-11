@@ -3,31 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="5dp"
-    android:paddingBottom="5dp"
+    android:paddingBottom="15dp"
     android:id="@+id/signin_fragmant"
     android:background="#f9f9f9"
     >
 
-
-
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="15dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:id="@+id/signin_btn"
-        android:layout_below="@+id/signin_password"
-        android:layout_alignParentStart="true"
         android:background="@drawable/btn_drawable2"
         android:backgroundTint="@color/light_blue"
         android:text="הירשם"
         android:textColor="@color/white"
-
-
-
-        />
+        android:layout_below="@+id/signin_phone"
+        android:layout_marginTop="20dp"
+         />
 
     <TextView
         android:layout_width="match_parent"
@@ -36,9 +29,11 @@
         android:id="@+id/tv7"
         android:gravity="center"
         android:textStyle="italic"
+        android:text="אחד מהשדות ריק. אנא מלא הכל ונסה שנית. הסיסמה צריכה להכיל לפחות 6 תווים"
         android:visibility="gone"
         android:layout_below="@+id/signin_btn"
-        />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="25dp" />
 
     <RelativeLayout
         android:id="@+id/signin_header"
@@ -87,10 +82,10 @@
         android:paddingLeft="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:textSize="14dp"
         android:drawableLeft="@drawable/ic_action_password"
-        android:layout_below="@+id/signin_email"
-
-        />
+        android:layout_below="@+id/signin_name"
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:id="@+id/signin_email"
@@ -103,15 +98,51 @@
         android:inputType="textEmailAddress"
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
-        android:layout_marginBottom="15dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="35dp"
-        android:layout_below="@+id/signin_header"
-        android:layout_alignParentStart="true"
         android:drawableLeft="@drawable/ic_action_mail"
+        android:textSize="14dp"
+        android:layout_below="@+id/signin_password"
+        android:layout_alignParentEnd="true" />
 
+    <EditText
 
-        />
+        android:id="@+id/signin_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="שם משתמש"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:gravity="right|center"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:drawableLeft="@drawable/ic_action_username"
+        android:drawableTint="#757575"
+        android:layout_marginTop="48dp"
+        android:layout_below="@+id/signin_header"
+        android:layout_alignParentEnd="true"
+        android:textSize="14dp"/>
+
+    <EditText
+        android:id="@+id/signin_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="טלפון"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:gravity="right|center"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:drawableLeft="@drawable/ic_action_phone"
+        android:drawableTint="#757575"
+        android:layout_below="@+id/signin_email"
+        android:layout_marginTop="7dp"
+        android:textSize="14dp"
+        android:layout_alignParentEnd="true"
+        android:inputType="phone"/>
 
 </RelativeLayout>

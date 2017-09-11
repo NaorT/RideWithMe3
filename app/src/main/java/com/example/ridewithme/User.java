@@ -12,6 +12,9 @@ public class User {
     private String email;
     private String password;
     private String id;
+    private String userImage;
+    private double lat;
+    private double lng;
 
     public String getId() {
         return id;
@@ -22,14 +25,40 @@ public class User {
     }
 
 
+    public double getLat() {
+        return lat;
+    }
 
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
 
-    public User(String name, String phone, String email, String password, String id) {
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
+    }
+
+    public String getUserImage() {
+        return userImage;
+    }
+
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
+    }
+
+    public User(String name, String phone, String email, String password, String id, double lat, double lng, String img) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.password = password;
         this.id = id;
+        this.lat = lat;
+        this.lng = lng;
+        this.userImage = img;
+
 
     }
 

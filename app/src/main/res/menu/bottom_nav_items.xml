@@ -7,7 +7,7 @@
         android:icon="@drawable/ic_action_mainscreen"
         app:showAsAction="ifRoom"
         android:enabled="true"
-        android:title="לוח" />
+        android:title="לוח ראשי" />
 
     <item
         android:id="@+id/search"

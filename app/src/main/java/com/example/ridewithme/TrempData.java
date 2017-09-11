@@ -14,11 +14,22 @@ public class TrempData {
     public String _timestamp;
     public String _uid;
     public String _key;
+    public String _image;
 
 
-
-
-
+    public TrempData( String _image, String _key, String _uid , String _name , String _phone, String _from, String _to, String _date, String _time, String _extras, String _timestamp) {
+        this._date = _date;
+        this._to = _to;
+        this._time = _time;
+        this._phone = _phone;
+        this._name = _name;
+        this._from = _from;
+        this._extras = _extras;
+        this._timestamp = _timestamp;
+        this._uid = _uid;
+        this._key = _key;
+        this._image = _image;
+    }
 
     public TrempData( String _key, String _uid , String _name , String _phone, String _from, String _to, String _date, String _time, String _extras, String _timestamp) {
         this._date = _date;
@@ -31,7 +42,6 @@ public class TrempData {
         this._timestamp = _timestamp;
         this._uid = _uid;
         this._key = _key;
-
 
     }
 
@@ -106,6 +116,14 @@ public class TrempData {
     public String get_key() {return _key; }
 
     public void set_key(String _key) {this._key = _key; }
+
+    public String get_image() {
+        return _image;
+    }
+
+    public void set_image(String _image) {
+        this._image = _image;
+    }
 
 
 }

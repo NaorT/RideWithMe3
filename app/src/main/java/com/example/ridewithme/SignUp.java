@@ -10,8 +10,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -45,8 +43,9 @@ public class SignUp extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.newsignup, null);
+        View v = inflater.inflate(R.layout.signup, null);
         getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+
 
         //INITIALIZE DATA_BASE AND VIEWS
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -60,7 +59,7 @@ public class SignUp extends DialogFragment {
         comment = (TextView)v.findViewById(R.id.tv7) ;
         signIn = (Button) v.findViewById(R.id.signin_btn);
         progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("אנא המתן.");
+        progressDialog.setMessage("אנא המתן...");
         progressDialog.setCanceledOnTouchOutside(false);
 
         signIn.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +79,10 @@ public class SignUp extends DialogFragment {
         final String name = et_name.getText().toString();
         final String phone = et_phone.getText().toString();
         final String id = "default";
-        final User user = new User(name,phone,email,password,id);
+        final String img = "default";
+        final double lat = 0;
+        final double lng = 0;
+        final User user = new User(name,phone,email,password,id,lat,lng,img);
 
 
         if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password) ){

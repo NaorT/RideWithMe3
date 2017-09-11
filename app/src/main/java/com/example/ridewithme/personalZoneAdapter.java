@@ -63,14 +63,13 @@ public class personalZoneAdapter extends ArrayAdapter<TrempData>  {
     private int layoutResource;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
-    MyDatePicker myDatePicker;
-    MyTimePicker myTimePicker;
+
 
     static class ViewHolderItem {
         private TextView uid ,timestamp;
-        private EditText name  , from,to,date,time,extra;
-        private ImageButton deleteTremp , editTremp , phoneBtn , submitText ;
-        private ImageView car,timeline;
+        private TextView name  , from,to,date,time,extra;
+        private ImageButton deleteTremp, edittremp ;
+        private ImageView row;
 
     }
 
@@ -83,7 +82,7 @@ public class personalZoneAdapter extends ArrayAdapter<TrempData>  {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, ViewGroup parent) {
         View view = convertView;
         final ViewHolderItem viewHolder;
 
@@ -92,20 +91,17 @@ public class personalZoneAdapter extends ArrayAdapter<TrempData>  {
             view = Inflater.inflate(layoutResource, null);
 
             viewHolder = new ViewHolderItem();
-            viewHolder.name = (EditText) view.findViewById(R.id.pzmyname);
-            viewHolder.timestamp = (TextView) view.findViewById(R.id.pzmytimestamp);
-            viewHolder.extra = (EditText) view.findViewById(R.id.pzmyextra);
-            viewHolder.uid = (TextView) view.findViewById(R.id.pzmyuid);
-            viewHolder.deleteTremp = (ImageButton)view.findViewById(R.id.pzremove);
-            //viewHolder.editTremp = (ImageButton)view.findViewById(R.id.pzedit);
-            viewHolder.phoneBtn = (ImageButton)view.findViewById(R.id.pzmyphone);
-            viewHolder.submitText = (ImageButton)view.findViewById(R.id.pzsubmit_edit);
-            viewHolder.car = (ImageView)view.findViewById(R.id.pzmycar);
-            viewHolder.timeline = (ImageView)view.findViewById(R.id.pztimeline);
-            viewHolder.date = (EditText) view.findViewById(R.id.pzmydate);
-            viewHolder.time = (EditText) view.findViewById(R.id.pzmytime);
-            viewHolder.from = (EditText) view.findViewById(R.id.pzmyfrom);
-            viewHolder.to = (EditText) view.findViewById(R.id.pzmyto);
+            //viewHolder.name = (EditText) view.findViewById(R.id.pzmyname);
+            viewHolder.timestamp = (TextView) view.findViewById(R.id.pznewtimestamp);
+            viewHolder.extra = (TextView) view.findViewById(R.id.pznewextra);
+            viewHolder.uid = (TextView) view.findViewById(R.id.pznewid);
+            viewHolder.deleteTremp = (ImageButton)view.findViewById(R.id.pznewdelete);
+            viewHolder.edittremp = (ImageButton)view.findViewById(R.id.pznewedit);
+            viewHolder.row = (ImageView)view.findViewById(R.id.pzrowbck);
+            viewHolder.date = (TextView) view.findViewById(R.id.pznewdate);
+            viewHolder.time = (TextView) view.findViewById(R.id.pznewtime);
+            viewHolder.from = (TextView) view.findViewById(R.id.pznewfrom);
+            viewHolder.to = (TextView) view.findViewById(R.id.pznewto);
             view.setTag(viewHolder);
         }
         else{
@@ -120,7 +116,7 @@ public class personalZoneAdapter extends ArrayAdapter<TrempData>  {
 
         if (data != null) {
 
-            viewHolder.name.setText(data.get_name());
+            // viewHolder.name.setText(data.get_name());
             viewHolder.timestamp.setText(data.get_timestamp());
             viewHolder.uid.setText(data.get_uid());
             viewHolder.date.setText(data.get_date());
@@ -128,67 +124,6 @@ public class personalZoneAdapter extends ArrayAdapter<TrempData>  {
             viewHolder.to.setText(data.get_to());
             viewHolder.from.setText(data.get_from());
             viewHolder.extra.setText(data.get_extras());
-
-            /*viewHolder.editTremp.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    viewHolder.submitText.setVisibility(View.VISIBLE);
-                    viewHolder.from.setEnabled(true);
-                    viewHolder.to.setEnabled(true);
-                    viewHolder.extra.setEnabled(true);
-                    viewHolder.date.setEnabled(true);
-                    myDatePicker = new MyDatePicker(getContext(),viewHolder.date);
-                    viewHolder.time.setEnabled(true);
-                    myTimePicker = new MyTimePicker(getContext(),viewHolder.time);
-                    viewHolder.from.setBackgroundColor(GRAY);
-                    viewHolder.to.setBackgroundColor(GRAY);
-                    viewHolder.extra.setBackgroundColor(GRAY);
-                    viewHolder.date.setBackgroundColor(GRAY);
-                    viewHolder.time.setBackgroundColor(GRAY);
-
-                }
-            });*/
-
-           /* viewHolder.submitText.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    //   String new_from = viewHolder.from.getText().toString();
-                    //   String new_to = viewHolder.to.getText().toString();
-                    //   String new_extra = viewHolder.extra.getText().toString();
-                    // String new_date = viewHolder.date.getText().toString();
-                    // String new_time = viewHolder.time.getText().toString();
-                    //   data.set_from(new_from);
-                    //   data.set_to(new_to);
-                    //   data.set_extras(new_extra);
-                    //    data.set_date(new_date);
-                    //   data.set_time(new_time);
-                    cancelEditable(viewHolder.from);
-                    cancelEditable(viewHolder.to);
-                    cancelEditable(viewHolder.extra);
-                    cancelEditable(viewHolder.date);
-                    cancelEditable(viewHolder.time);
-                    viewHolder.submitText.setVisibility(View.GONE);
-                    mDatabase.child("Posts").child(data.get_key().toString()).child("_from").setValue(viewHolder.from.getText().toString());
-                    mDatabase.child("Posts").child(data.get_key().toString()).child("_to").setValue(viewHolder.to.getText().toString());
-                    mDatabase.child("Posts").child(data.get_key().toString()).child("_extras").setValue(viewHolder.extra.getText().toString());
-                    mDatabase.child("Posts").child(data.get_key().toString()).child("_date").setValue(viewHolder.date.getText().toString());
-                    mDatabase.child("Posts").child(data.get_key().toString()).child("_time").setValue(viewHolder.time.getText().toString());
-
-
-                }
-            });*/
-
-            viewHolder.phoneBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent i = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + data.get_phone()));
-                    getContext().startActivity(i);
-                }
-            });
-
-
 
             viewHolder.deleteTremp.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -199,30 +134,10 @@ public class personalZoneAdapter extends ArrayAdapter<TrempData>  {
                 }
             });
 
-            if(firebaseAuth.getCurrentUser().getUid().equals(viewHolder.uid.getText())){
-
-                viewHolder.car.setColorFilter(Color.rgb(255,164,30));
-                //viewHolder.car.setImageURI(data.get_image());
-            }
-            else{
-
-                viewHolder.car.setColorFilter(Color.rgb(176,176,176));
-            }
-
         }
 
         return view;
     }
-
-
-
-    public void cancelEditable(EditText v){
-        v.setEnabled(false);
-        v.setBackground(new ColorDrawable(TRANSPARENT));
-        v.setCursorVisible(false);
-        v.setFocusableInTouchMode(false);
-    }
-
 
 }
 

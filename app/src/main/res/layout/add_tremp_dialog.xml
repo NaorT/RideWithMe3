@@ -13,9 +13,9 @@
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/new_tremp_dialog_header"
-        android:paddingTop="10dp">
+        android:paddingBottom="20dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -26,7 +26,7 @@
             android:gravity="center_horizontal"
             android:paddingRight="20dp"
             android:paddingLeft="20dp"
-            android:paddingTop="10dp"
+            android:paddingTop="5dp"
             android:isScrollContainer="true"
 
 
@@ -45,6 +45,7 @@
                 android:gravity="right|center"
                 android:layout_alignParentStart="true"
                 android:drawableLeft="@drawable/ic_action_username"
+                android:visibility="gone"
 
                 />
 
@@ -62,12 +63,45 @@
                 android:layout_below="@+id/name"
                 android:layout_alignParentStart="true"
                 android:drawableLeft="@drawable/ic_action_phone"
-
-
+                android:visibility="gone"
 
                 />
 
-            <EditText
+            <AutoCompleteTextView
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/from"
+                android:hint="מוצא"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:paddingRight="5dp"
+                android:layout_below="@+id/phone"
+                android:textSize="14dp"
+                android:gravity="right|center"
+                android:drawableLeft="@drawable/ic_action_from">
+
+                <requestFocus />
+            </AutoCompleteTextView>
+
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/to"
+                android:hint="יעד"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:paddingRight="5dp"
+                android:layout_below="@+id/from"
+                android:textSize="14dp"
+                android:gravity="right|center"
+                android:drawableLeft="@drawable/ic_action_to">
+
+
+            </AutoCompleteTextView>
+
+            <!--<EditText
+                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/from"
@@ -95,7 +129,7 @@
                 android:gravity="right|center"
                 android:drawableLeft="@drawable/ic_action_to"
 
-                />
+                />-->
 
             <EditText
                 android:layout_width="match_parent"
@@ -163,7 +197,7 @@
             android:id="@+id/textView"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="10dp"
-            android:textSize="25dp"
+            android:textSize="21dp"
             android:textColor="@color/white"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true" />

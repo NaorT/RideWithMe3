@@ -4,12 +4,9 @@
     android:layout_height="match_parent"
     android:paddingBottom="15dp"
 
-
-
    >
 
     <RelativeLayout
-
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@color/light_blue"
@@ -27,7 +24,7 @@
             android:id="@+id/textView5"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
-            android:textSize="25dp"
+            android:textSize="21dp"
             android:textColor="@color/white"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
@@ -39,7 +36,7 @@
 
      />
 
-    <EditText
+    <!--<EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/from"
@@ -52,9 +49,26 @@
         android:drawableLeft="@drawable/ic_action_from"
         android:layout_marginTop="20dp"
         android:textSize="14dp"
-       />
+       />-->
 
-    <EditText
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/from"
+        android:hint="מוצא"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/search_tremp_dialog_header"
+        android:layout_marginBottom="5dp"
+        android:gravity="right|center"
+        android:drawableLeft="@drawable/ic_action_from"
+        android:layout_marginTop="20dp"
+        android:textSize="14dp">
+
+        <requestFocus />
+    </AutoCompleteTextView>
+
+   <!-- <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/to"
@@ -65,7 +79,22 @@
         android:layout_marginBottom="5dp"
         android:gravity="right|center"
         android:drawableLeft="@drawable/ic_action_to"
-        android:textSize="14dp"/>
+        android:textSize="14dp"/>-->
+
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/to"
+        android:hint="יעד"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/from"
+        android:layout_marginBottom="5dp"
+        android:gravity="right|center"
+        android:drawableLeft="@drawable/ic_action_to"
+        android:textSize="14dp">
+
+    </AutoCompleteTextView>
 
     <EditText
         android:layout_width="match_parent"
