@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/change_picture"
+        android:orderInCategory="1"
+        android:icon="@mipmap/ic_action_image"
+        android:title="שנה תמונה"/>
+   <!-- <item
+        android:id="@+id/change_email"
+        android:orderInCategory="2"
+        android:icon="@mipmap/ic_launcher_change_mail"
+        android:title="שנה אימייל"/>-->
+    <item
+        android:id="@+id/delete_account"
+        android:orderInCategory="5"
+        android:icon="@mipmap/ic_launcher_delete_account"
+        android:title="מחק חשבון"/>
+   <!-- <item
+        android:id="@+id/change_password"
+        android:orderInCategory="3"
+        android:icon="@mipmap/ic_launcher_change_password"
+        android:title="שנה סיסמה"/>-->
+
+    <item
+        android:id="@+id/logout"
+
+        android:orderInCategory="4"
+        android:icon="@mipmap/ic_launcher_logout2"
+        android:title="התנתק"/>
+
+
+
+</menu>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+
+
+    >
+
+    <ImageView
+        android:id="@+id/rowbck"
+        android:src="@drawable/row8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newkey"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/newkey"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+
+        android:layout_marginBottom="7dp"
+        android:id="@+id/newfrom"
+        android:layout_width="145dp"
+        android:layout_height="wrap_content"
+        android:drawablePadding="5dp"
+        android:drawableRight="@drawable/group1"
+        android:gravity="center|right"
+        android:hint="מוצא"
+        android:textSize="12dp"
+        android:layout_below="@+id/newprofileimg"
+        android:layout_toStartOf="@+id/newprofileimg" />
+
+    <TextView
+
+        android:id="@+id/newto"
+        android:layout_width="145dp"
+        android:layout_height="wrap_content"
+        android:drawablePadding="5dp"
+        android:drawableRight="@drawable/compoundpath"
+        android:gravity="center|right"
+        android:hint="יעד"
+        android:textSize="12dp"
+        android:layout_below="@+id/newfrom"
+        android:layout_alignEnd="@+id/newfrom" />
+
+    <TextView
+        android:drawablePadding="5dp"
+        android:drawableRight="@drawable/group2"
+        android:hint="תאריך"
+        android:textSize="12dp"
+        android:id="@+id/newdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/newfrom"
+        android:layout_alignStart="@+id/newtimestamp"
+        android:layout_marginStart="30dp" />
+    <TextView
+        android:layout_marginBottom="7dp"
+        android:drawablePadding="10dp"
+        android:drawableRight="@drawable/compoundpath2"
+        android:hint="שעה"
+        android:textSize="12dp"
+        android:id="@+id/newtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/newto"
+        android:layout_alignBottom="@+id/newto"
+        android:layout_alignEnd="@+id/newdate" />
+
+    <TextView
+        android:id="@+id/newextra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="7dp"
+        android:drawableRight="@drawable/ellipse1"
+        android:gravity="right|center"
+        android:hint="הערות"
+        android:paddingRight="5dp"
+        android:textSize="12dp"
+        android:layout_below="@+id/newtime"
+        android:layout_alignEnd="@+id/newto"
+        android:layout_alignStart="@+id/newmsg" />
+
+    <TextView
+
+        android:gravity="center|right"
+        android:textColor="@color/white"
+        android:hint="חותמת זמן"
+        android:textSize="12dp"
+        android:id="@+id/newtimestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_below="@+id/newkey"
+        android:layout_toEndOf="@+id/newkey"
+        android:layout_marginTop="22dp" />
+
+    <ImageButton
+        android:layout_marginLeft="10dp"
+        android:backgroundTint="@color/white"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:id="@+id/mynewphone"
+        android:background="@mipmap/ic_phone"
+        android:onClick="makePhoneCall"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="8dp"
+        android:layout_alignBottom="@+id/rowbck"
+        android:layout_toEndOf="@+id/newmsg" />
+
+    <ImageButton
+        android:backgroundTint="@color/white"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/newmsg"
+        android:background="@drawable/msg"
+        android:layout_alignBottom="@+id/mynewphone"
+        android:layout_alignStart="@+id/newtimestamp"
+        android:layout_alignTop="@+id/mynewphone"
+        />
+
+    <com.github.siyamed.shapeimageview.CircularImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:siBorderWidth="1dp"
+        app:siBorderColor="@color/orange"
+        android:id="@+id/newprofileimg"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"
+        />
+
+    <TextView
+        android:paddingRight="10dp"
+        android:gravity="right|center"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/white"
+        android:hint="שם פרטי"
+        android:textSize="14dp"
+        android:id="@+id/newname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/newtimestamp"
+        android:layout_alignBottom="@+id/newtimestamp"
+        android:layout_alignEnd="@+id/newfrom" />
+
+
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/newkey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/newid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    >
+
+    <ImageView
+        android:id="@+id/pzrowbck"
+        android:src="@drawable/pzrowbckkk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pznewkey"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/pznewkey"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/pznewfrom"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:drawablePadding="5dp"
+        android:drawableRight="@drawable/group1"
+        android:gravity="center|right"
+        android:hint="מוצא"
+        android:textSize="12dp"
+        android:layout_marginTop="25dp"
+android:layout_marginBottom="10dp"
+        android:layout_below="@+id/pznewedit"
+        android:layout_alignEnd="@+id/pznewdelete" />
+
+    <TextView
+android:layout_marginBottom="10dp"
+        android:id="@+id/pznewto"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:drawablePadding="5dp"
+        android:drawableRight="@drawable/compoundpath"
+        android:gravity="center|right"
+        android:hint="יעד"
+        android:textSize="12dp"
+        android:layout_below="@+id/pznewfrom"
+        android:layout_alignEnd="@+id/pznewfrom" />
+
+    <TextView
+        android:drawablePadding="5dp"
+        android:drawableRight="@drawable/group2"
+        android:hint="תאריך"
+        android:textSize="12dp"
+        android:id="@+id/pznewdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="33dp"
+        android:layout_alignTop="@+id/pznewfrom"
+        android:layout_alignStart="@+id/pznewtimestamp" />
+    <TextView
+        android:drawablePadding="10dp"
+        android:drawableRight="@drawable/compoundpath2"
+        android:hint="שעה"
+        android:textSize="12dp"
+        android:id="@+id/pznewtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pznewfrom"
+        android:layout_alignEnd="@+id/pznewdate" />
+
+    <TextView
+        android:id="@+id/pznewextra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="7dp"
+        android:drawableRight="@drawable/ellipse1"
+        android:gravity="right|center"
+        android:hint="הערות"
+        android:paddingRight="5dp"
+        android:textSize="12dp"
+        android:layout_below="@+id/pznewto"
+        android:layout_alignEnd="@+id/pznewto"
+        android:layout_toEndOf="@+id/pznewtime"
+        android:layout_alignStart="@+id/pznewtimestamp" />
+
+    <TextView
+
+        android:gravity="center|right"
+        android:textColor="@color/white"
+        android:hint="חותמת זמן"
+        android:textSize="12dp"
+        android:id="@+id/pznewtimestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="27dp"
+        android:layout_alignTop="@+id/pznewedit"
+        android:layout_toEndOf="@+id/pznewkey" />
+
+    <ImageButton
+
+
+        android:backgroundTint="@color/white"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/pznewedit"
+        android:background="@mipmap/ic_edit"
+        android:onClick="onClick"
+        android:layout_marginEnd="10dp"
+        android:layout_alignTop="@+id/pznewdelete"
+        android:layout_toStartOf="@+id/pznewdelete" />
+
+    <ImageButton
+
+        android:backgroundTint="@color/white"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/pznewdelete"
+        android:background="@mipmap/ic_remove"
+        android:layout_marginEnd="32dp"
+        android:layout_below="@+id/pznewkey"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp" />
+
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/pznewkey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/pznewid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+
+
+</RelativeLayout>
