@@ -52,6 +52,9 @@ public class MyTimePicker implements View.OnClickListener, TimePickerDialog.OnTi
         else if (hourOfDay > 9 && minute < 10){
             this.editText.setText(hourOfDay + ":" + "0" + minute);
         }
+        else if (hourOfDay > 9 && minute > 9){
+            this.editText.setText(hourOfDay + ":" + minute);
+        }
 
 
 

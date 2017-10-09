@@ -14,7 +14,9 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 
@@ -31,6 +33,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+import lib.kingja.switchbutton.SwitchMultiButton;
+
 /**
  * Created by Mesfin & Naor on 14/12/2016.
  */
@@ -44,6 +48,7 @@ public class Addtremp extends DialogFragment {
     private FirebaseAuth mAuth;
     private MyDatePicker myDatePicker;
     private MyTimePicker myTimePicker;
+
     String userUid;
     FirebaseMessaging fm;
     AlertDialog alertDialog;
@@ -131,10 +136,6 @@ public class Addtremp extends DialogFragment {
             @Override
             public void onClick(View v) {
 
-
-
-
-
                 Date myDate = new Date();
                 SimpleDateFormat mdyFormat = new SimpleDateFormat("dd-MM-yyyy");
                 String mdy = mdyFormat.format(myDate);
@@ -144,6 +145,7 @@ public class Addtremp extends DialogFragment {
                 str_to = to.getText().toString();
                 str_date = date.getText().toString();
                 str_time = time.getText().toString();
+
                 str_extra = extra.getText().toString();
                 str_timestamp = send_time2 + ", " + mdy;
                 str_uid = mAuth.getCurrentUser().getUid();
