@@ -1,4 +1,4 @@
-# RideWithMe3
+# Ride With Me Project
 Ride sharing app
 
 As a 4th year students, we have noticed that there is problem for some of us to get to and from the university. 
