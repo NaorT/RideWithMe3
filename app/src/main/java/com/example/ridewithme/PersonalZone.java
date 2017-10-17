@@ -264,11 +264,11 @@ public class PersonalZone extends AppCompatActivity {
                         startActivityForResult(galleryIntent, GALLERY_INTENT);
                         break;
 
-                    /*case R.id.change_email:
-                        showChangeEmailDialog();
+                    case R.id.change_phoneNumber:
+                        showChangeNumberDialog();
                         break;
 
-                    case R.id.change_password:
+                    /*case R.id.change_password:
                         showChangePasswordDialog();
                         break;*/
 
@@ -285,6 +285,8 @@ public class PersonalZone extends AppCompatActivity {
             }
         });
     }
+
+
 
 
     @Override
@@ -375,29 +377,40 @@ public class PersonalZone extends AppCompatActivity {
 
     }
 
-   /* public void showChangeEmailDialog() {
+    public void showChangeNumberDialog() {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.update_user_email_dialog, null);
+        final View dialogView = inflater.inflate(R.layout.update_user_phone_dialog, null);
         dialogBuilder.setView(dialogView);
 
-        final EditText current_mail = (EditText) dialogView.findViewById(R.id.current_email);
-        final EditText new_mail = (EditText) dialogView.findViewById(R.id.new_email);
-        final EditText current_password = (EditText) dialogView.findViewById(R.id.current_password);
+        final EditText new_phone = (EditText) dialogView.findViewById(R.id.change_phoneNumberET);
 
-        dialogBuilder.setTitle("עדכון מייל");
-        dialogBuilder.setMessage("הכנס את הפרטים הבאים");
+
+        dialogBuilder.setTitle("עדכון פלאפון");
+        dialogBuilder.setMessage("הכנס את המספר החדש");
         dialogBuilder.setPositiveButton("שלח", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
 
-                mDatabase.child("Users").child(mAuth.getCurrentUser().getUid()).child("email").setValue(new_mail.getText().toString());
-                mAuth.getCurrentUser().updateEmail(new_mail.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                mDatabase.child("Users").child(mAuth.getCurrentUser().getUid()).child("phone").setValue(new_phone.getText().toString());
+                mDatabase.child("Posts").addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(PersonalZone.this,"המייל עודכן בהצלחה",Toast.LENGTH_LONG).show();
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                            TrempData td = ds.getValue(TrempData.class);
+                            if (mAuth.getCurrentUser().getUid().toString().equals(td.get_uid())) {
+                                mDatabase.child("Posts").child(td.get_key().toString()).child("_phone").setValue(new_phone.getText().toString());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
                     }
                 });
+
             }
         });
         dialogBuilder.setNegativeButton("בטל", new DialogInterface.OnClickListener() {
@@ -407,42 +420,9 @@ public class PersonalZone extends AppCompatActivity {
         });
         AlertDialog b = dialogBuilder.create();
         b.show();
-    }*/
+    }
 
 
-    /*public void showChangePasswordDialog() {
-
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = this.getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.update_user_password_dialog, null);
-        dialogBuilder.setView(dialogView);
-
-        final EditText current_mail = (EditText) dialogView.findViewById(R.id.current_email);
-        final EditText current_password = (EditText) dialogView.findViewById(R.id.current_password);
-        final EditText new_password = (EditText) dialogView.findViewById(R.id.new_password);
-
-        dialogBuilder.setTitle("עדכון סיסמה");
-        dialogBuilder.setMessage("הכנס את הפרטים הבאים");
-        dialogBuilder.setPositiveButton("שלח", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-
-                mDatabase.child("Users").child(mAuth.getCurrentUser().getUid()).child("password").setValue(new_password.getText().toString());
-                firebaseUser.updatePassword(new_password.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(PersonalZone.this, "הסיסמה עודכנה בהצלחה", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-        dialogBuilder.setNegativeButton("בטל", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                startActivity(new Intent(PersonalZone.this , MainScreen.class));
-            }
-        });
-        AlertDialog b = dialogBuilder.create();
-        b.show();
-    }*/
 
     public void deleteAccount(){
         alertDialog = new AlertDialog.Builder(PersonalZone.this).create();
@@ -456,8 +436,9 @@ public class PersonalZone extends AppCompatActivity {
                 firebaseUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        startActivity(new Intent(PersonalZone.this , LoginActivity.class));
+
                         Toast.makeText(PersonalZone.this,"החשבון נמחק בהצלחה",Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(PersonalZone.this , LoginActivity.class));
                     }
                 });
             }

@@ -6,11 +6,11 @@
         android:orderInCategory="1"
         android:icon="@mipmap/ic_action_image"
         android:title="שנה תמונה"/>
-   <!-- <item
-        android:id="@+id/change_email"
+   <item
+        android:id="@+id/change_phoneNumber"
         android:orderInCategory="2"
-        android:icon="@mipmap/ic_launcher_change_mail"
-        android:title="שנה אימייל"/>-->
+        android:icon="@mipmap/ic_update_phone"
+        android:title="שנה טלפון"/>
     <item
         android:id="@+id/delete_account"
         android:orderInCategory="5"
@@ -24,7 +24,6 @@
 
     <item
         android:id="@+id/logout"
-
         android:orderInCategory="4"
         android:icon="@mipmap/ic_launcher_logout2"
         android:title="התנתק"/>

@@ -145,7 +145,7 @@ public class SearchTremp extends DialogFragment {
                     if(trempData.get_from().equals(str_from)
                             && trempData.get_to().equals(str_to)
                             && trempData.get_date().equals(str_date)
-                            && trempdataTime < timeplus10 && trempdataTime > timeminus10 ){
+                            && (trempdataTime <= timeplus10 && trempdataTime >= timeminus10) ){
 
                         sendSMS(trempData.get_phone(),"מערכת Ride With Me מצאה אותך מתאים  עבור הגדרות החיפוש שלי. אם זה עדיין רלוונטי אשמח שתיצור איתי קשר במספר זה. תודה רבה, " + userName[0]);
                     }
